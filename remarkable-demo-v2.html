@@ -386,9 +386,34 @@ input[type="checkbox"] { width:14px; height:14px; cursor:pointer; accent-color:v
 
 /* Drag hint */
 .drag-hint { font-size:10px; color:var(--text-muted); text-align:center; padding:6px; font-style:italic; }
+
+/* ===== TOAST ===== */
+#toast-container { position:fixed; bottom:24px; right:24px; z-index:9999; display:flex; flex-direction:column; gap:8px; pointer-events:none; }
+.toast {
+  background:#1c1c1e; color:#fff; font-size:12px; font-weight:500;
+  padding:10px 16px; border-radius:8px; border-left:3px solid var(--green);
+  box-shadow:0 4px 16px rgba(0,0,0,0.25);
+  display:flex; align-items:center; gap:8px;
+  animation:toastIn .25s ease forwards;
+  pointer-events:auto;
+}
+.toast.toast-out { animation:toastOut .3s ease forwards; }
+@keyframes toastIn  { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:none} }
+@keyframes toastOut { from{opacity:1;transform:none} to{opacity:0;transform:translateY(12px)} }
+
+/* ===== TYPING INDICATOR ===== */
+.typing-indicator { display:flex; align-items:center; gap:4px; padding:7px 10px; background:white; border-radius:0 8px 8px 8px; width:fit-content; }
+.typing-dot { width:6px; height:6px; border-radius:50%; background:#aaa; animation:typingBounce 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation-delay:.2s; }
+.typing-dot:nth-child(3) { animation-delay:.4s; }
+@keyframes typingBounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
+
+/* hidden contact rows when searching */
+tr.contact-hidden { display:none; }
 </style>
 </head>
 <body>
+<div id="toast-container"></div>
 
 <!-- SIDEBAR -->
 <nav class="sidebar">
@@ -468,25 +493,25 @@ input[type="checkbox"] { width:14px; height:14px; cursor:pointer; accent-color:v
       <div class="stat-card">
         <div class="stat-icon">👥</div>
         <div class="stat-label">Leads este mes</div>
-        <div class="stat-value">47</div>
+        <div class="stat-value" data-countup="47">0</div>
         <div class="stat-change">↑ +23% vs mes anterior</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">◈</div>
         <div class="stat-label">En negociación</div>
-        <div class="stat-value" style="color:var(--yellow)">12</div>
+        <div class="stat-value" style="color:var(--yellow)" data-countup="12">0</div>
         <div class="stat-change" style="color:var(--yellow)">↑ +4 esta semana</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">✅</div>
         <div class="stat-label">Cierres del mes</div>
-        <div class="stat-value" style="color:var(--green)">5</div>
+        <div class="stat-value" style="color:var(--green)" data-countup="5">0</div>
         <div class="stat-change">Meta: 8 cierres</div>
       </div>
       <div class="stat-card">
         <div class="stat-icon">🌐</div>
         <div class="stat-label">Leads del exterior</div>
-        <div class="stat-value" style="color:var(--blue)">18</div>
+        <div class="stat-value" style="color:var(--blue)" data-countup="18">0</div>
         <div class="stat-change">↑ Argentina · España · Brasil</div>
       </div>
     </div>
@@ -578,7 +603,7 @@ input[type="checkbox"] { width:14px; height:14px; cursor:pointer; accent-color:v
           <span style="font-size:12px;color:var(--blue);font-weight:600;">47 contactos</span>
         </div>
         <div style="display:flex;gap:8px;align-items:center;">
-          <input class="search-input" placeholder="🔍  Buscar contactos...">
+          <input class="search-input" id="contactos-search" placeholder="🔍  Buscar contactos..." oninput="filterContactos(this.value)">
           <button class="btn-secondary">⚙ Filtros avanzados</button>
           <button class="btn-secondary">Ordenar</button>
           <button class="btn-primary">+ Agregar contacto</button>
@@ -589,7 +614,7 @@ input[type="checkbox"] { width:14px; height:14px; cursor:pointer; accent-color:v
           <th class="checkbox-col"><input type="checkbox"></th>
           <th>Nombre del contacto</th><th>Teléfono</th><th>Email</th><th>Proyecto</th><th>Creado</th><th>Últ. actividad</th><th>Etiquetas</th>
         </tr></thead>
-        <tbody>
+        <tbody id="contactos-tbody">
           <tr><td><input type="checkbox"></td><td><strong>Roberto Flores</strong></td><td>+54 9 11 xxxx</td><td>r.flores@gmail.com</td><td>Itauba</td><td style="color:var(--text-muted);font-size:11px">27 feb, 03:02 PM</td><td style="color:var(--text-muted);font-size:11px">5 minutos atrás</td><td><span class="tag tag-wa">itauba · exterior</span></td></tr>
           <tr><td><input type="checkbox"></td><td><strong>Patricia Quispe</strong></td><td>+591 70xxx</td><td>p.quispe@gmail.com</td><td>Caoba</td><td style="color:var(--text-muted);font-size:11px">27 feb, 01:01 PM</td><td style="color:var(--text-muted);font-size:11px">2 horas atrás</td><td><span class="tag tag-watch">caoba · visita</span></td></tr>
           <tr><td><input type="checkbox"></td><td><strong>Carlos Mendoza</strong></td><td>+34 6xx xxx</td><td>c.mendoza@gmail.com</td><td>Abedules Norte</td><td style="color:var(--text-muted);font-size:11px">27 feb, 09:54 AM</td><td style="color:var(--text-muted);font-size:11px">5 horas atrás</td><td><span class="tag tag-reg">exterior · nuevo</span></td></tr>
@@ -1016,6 +1041,11 @@ function showPage(id, el) {
   document.getElementById('page-title').textContent = pageTitles[id] || id;
   const cta = document.getElementById('topbar-cta');
   cta.textContent = ctaBtns[id] || '+ Nuevo';
+  /* Re-run count-up if navigating back to dashboard */
+  if (id === 'dashboard') {
+    document.querySelectorAll('[data-countup]').forEach(el => delete el.dataset.counted);
+    runCountUp();
+  }
 }
 
 // ===== PIPELINE KANBAN + DRAG & DROP =====
@@ -1081,8 +1111,14 @@ function setupDropZone(zone) {
     e.preventDefault();
     zone.classList.remove('drag-over');
     if (draggedCard) {
+      const prevCol = draggedCard.dataset.colId;
       zone.appendChild(draggedCard);
       draggedCard.dataset.colId = zone.dataset.colId;
+      if (prevCol !== zone.dataset.colId) {
+        const colHeader = zone.closest('.kanban-col').querySelector('.kanban-col-title');
+        const leadName = draggedCard.querySelector('.lead-name')?.textContent || 'Lead';
+        showToast('✓ ' + leadName + ' movido a ' + (colHeader?.textContent || zone.dataset.colId));
+      }
     }
   });
 }
@@ -1218,14 +1254,79 @@ function loadConv(c, el) {
   document.getElementById('conv-avatar').textContent = c.initials;
   const msgs = document.getElementById('conv-messages');
   msgs.innerHTML = '';
-  c.msgs.forEach(m => {
+
+  /* Show all messages except the last, then typing indicator, then last message */
+  const allMsgs = c.msgs;
+  const lastMsg = allMsgs[allMsgs.length - 1];
+  const prevMsgs = allMsgs.slice(0, -1);
+
+  prevMsgs.forEach(m => {
+    msgs.appendChild(buildMsgEl(m));
+  });
+
+  /* Typing indicator */
+  const typingEl = document.createElement('div');
+  typingEl.className = 'wa-msg wa-msg-in';
+  typingEl.innerHTML = '<div class="typing-indicator"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>';
+  msgs.appendChild(typingEl);
+  msgs.scrollTop = msgs.scrollHeight;
+
+  setTimeout(() => {
+    typingEl.remove();
+    msgs.appendChild(buildMsgEl(lastMsg));
+    msgs.scrollTop = msgs.scrollHeight;
+  }, 1300);
+}
+
+function buildMsgEl(m) {
     const div = document.createElement('div');
     div.style.cssText = `display:flex;flex-direction:column;align-items:${m.in ? 'flex-start':'flex-end'};`;
     div.innerHTML = `
       <div style="max-width:75%;background:${m.in ? 'white':'#dcf8c6'};border-radius:${m.in?'0 8px 8px 8px':'8px 0 8px 8px'};padding:8px 10px;font-size:11px;line-height:1.4;box-shadow:0 1px 2px rgba(0,0,0,0.06);">${m.text}</div>
       <div style="font-size:9px;color:var(--text-muted);margin-top:2px;">${m.time}${m.auto ? ' · 🤖 Automático':''}</div>
     `;
-    msgs.appendChild(div);
+    return div;
+}
+
+// ===== TOAST =====
+function showToast(msg, color) {
+  const tc = document.getElementById('toast-container');
+  const t = document.createElement('div');
+  t.className = 'toast';
+  t.style.borderLeftColor = color || 'var(--green)';
+  t.textContent = msg;
+  tc.appendChild(t);
+  setTimeout(() => {
+    t.classList.add('toast-out');
+    setTimeout(() => t.remove(), 350);
+  }, 2800);
+}
+
+// ===== COUNT-UP =====
+function runCountUp() {
+  document.querySelectorAll('[data-countup]').forEach(el => {
+    if (el.dataset.counted) return;
+    el.dataset.counted = '1';
+    const target = parseInt(el.dataset.countup);
+    const dur = 1400;
+    let t0 = null;
+    function tick(ts) {
+      if (!t0) t0 = ts;
+      const p = Math.min((ts - t0) / dur, 1);
+      const e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(e * target);
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  });
+}
+
+// ===== CONTACTOS SEARCH =====
+function filterContactos(query) {
+  const q = query.toLowerCase().trim();
+  document.querySelectorAll('#contactos-tbody tr').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    row.classList.toggle('contact-hidden', q.length > 0 && !text.includes(q));
   });
 }
 
@@ -1237,5 +1338,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // load conv 0
   const firstConv = document.querySelector('#conv-list > div');
   if (firstConv) loadConv(convData[0], firstConv);
+
+  /* Count-up runs once on load (dashboard is default active page) */
+  runCountUp();
+
 });
 </script>
