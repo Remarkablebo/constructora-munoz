@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Constructora Muñoz — Inversión en Ladrillo</title>
+  <meta name="description" content="19 proyectos entregados exitosamente. Departamentos en preventa en Cochabamba. Constructora Muñoz — inversión inmobiliaria segura en Bolivia.">
+  <meta name="keywords" content="Departamentos en preventa Cochabamba, Inversión inmobiliaria segura Bolivia, Constructora Muñoz proyectos, Departamentos Av. Uyuni">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ─ Reset ─ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: #1a1a1a; background: #fff; overflow-x: hidden; }
+    img  { display: block; max-width: 100%; }
+
+    :root { --y:#F5C200; --b:#1a1a1a; --w:#ffffff; --g:#f4f4f2; --m:#666; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background:var(--b); height:76px; padding:0 4%;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-logo img { height:52px; width:auto; }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; }
+    .nav-links a {
+      display:block; padding:8px 14px;
+      color:rgba(255,255,255,.7); text-decoration:none;
+      font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+      transition:color .2s; white-space:nowrap;
+    }
+    .nav-links a:hover { color:var(--y); }
+    .nav-cta { margin-left:6px; background:var(--y)!important; color:var(--b)!important; padding:10px 20px!important; font-weight:700!important; }
+    .nav-cta:hover { opacity:.88; }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .nav-hamburger span { display:block; width:24px; height:2px; background:var(--w); }
+    .nav-drawer {
+      display:none; position:fixed; top:76px; left:0; right:0;
+      background:#111; padding:20px 5% 28px;
+      border-top:1px solid rgba(255,255,255,.08);
+      flex-direction:column; gap:2px; z-index:999;
+    }
+    .nav-drawer.open { display:flex; }
+    .nav-drawer a { color:rgba(255,255,255,.75); text-decoration:none; font-size:15px; font-weight:600; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.07); }
+    .nav-drawer a:last-child { color:var(--y); border:none; }
+
+    /* ── HERO ── */
+    #hero { position:relative; min-height:100vh; display:flex; flex-direction:column; overflow:hidden; }
+    .hero-bg {
+      position:absolute; inset:0;
+      background:url('https://i.imgur.com/EysVCxe.png') center 30%/cover no-repeat;
+      animation:bgZoom 20s ease-out forwards;
+    }
+    @keyframes bgZoom { from{transform:scale(1.06)} to{transform:scale(1)} }
+    .hero-overlay {
+      position:absolute; inset:0;
+      background:linear-gradient(110deg,rgba(8,8,8,.93) 0%,rgba(8,8,8,.76) 52%,rgba(8,8,8,.35) 100%);
+    }
+    #hero::after {
+      content:''; position:absolute; bottom:0; left:0; width:45%; height:3px; background:var(--y);
+    }
+
+    .hero-body {
+      position:relative; z-index:2; flex:1;
+      max-width:1280px; margin:0 auto; width:100%;
+      padding:110px 4% 40px;
+      display:grid; grid-template-columns:1fr 360px; gap:56px; align-items:center;
+    }
+
+    /* Hero load animations */
+    @keyframes heroDown  { from{opacity:0;transform:translateY(-24px)} to{opacity:1;transform:none} }
+    @keyframes heroLeft  { from{opacity:0;transform:translateX(-28px)} to{opacity:1;transform:none} }
+    @keyframes heroUp    { from{opacity:0;transform:translateY(28px)}  to{opacity:1;transform:none} }
+    @keyframes heroRight { from{opacity:0;transform:translateX(36px)}  to{opacity:1;transform:none} }
+
+    .hero-logo      { height:64px; width:auto; margin-bottom:32px; filter:drop-shadow(0 4px 24px rgba(0,0,0,.5)); animation:heroDown  .8s ease .15s both; }
+    .hero-eyebrow   { animation:heroLeft .7s ease .45s both; }
+    h1              { animation:heroUp   .8s ease .65s both; }
+    .hero-sub       { animation:heroUp   .7s ease .85s both; }
+    .hero-ctas      { animation:heroUp   .7s ease 1.05s both; }
+    .hero-slider-wrap{ animation:heroRight .9s ease .5s both; }
+    .hero-metrics   { animation:heroUp   .6s ease 1.2s both; }
+
+    .hero-eyebrow {
+      display:inline-flex; align-items:center; gap:12px;
+      color:var(--y); font-size:11px; font-weight:700; letter-spacing:.24em; text-transform:uppercase;
+      margin-bottom:20px;
+    }
+    .hero-eyebrow::before { content:''; display:block; width:36px; height:1px; background:var(--y); }
+
+    h1 { color:var(--w); font-size:clamp(34px,5.5vw,66px); font-weight:900; line-height:1.06; letter-spacing:-.03em; margin-bottom:20px; }
+    h1 em { color:var(--y); font-style:normal; }
+    .hero-sub { color:rgba(255,255,255,.54); font-size:16px; line-height:1.75; max-width:480px; margin-bottom:40px; }
+    .hero-ctas { display:flex; gap:14px; flex-wrap:wrap; }
+
+    .btn { display:inline-block; font-family:'Montserrat',sans-serif; font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; text-decoration:none; padding:16px 36px; border:2px solid transparent; cursor:pointer; transition:all .22s; }
+    .btn-y  { background:var(--y); color:var(--b); border-color:var(--y); }
+    .btn-y:hover { opacity:.88; transform:translateY(-2px); }
+    .btn-o  { background:transparent; color:var(--w); border-color:rgba(255,255,255,.22); }
+    .btn-o:hover { border-color:var(--y); color:var(--y); }
+
+    /* Hero slider — NO border, no shadow */
+    .hero-slider-wrap { position:relative; width:100%; aspect-ratio:4/5; overflow:hidden; }
+    .hs-slide { position:absolute; inset:0; opacity:0; transition:opacity .9s ease; }
+    .hs-slide.active { opacity:1; }
+    .hs-slide img { width:100%; height:100%; object-fit:cover; }
+    .hs-btn {
+      position:absolute; top:50%; transform:translateY(-50%);
+      background:rgba(0,0,0,.5); border:none; color:var(--w);
+      font-size:22px; width:40px; height:40px;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; transition:background .2s; z-index:4;
+    }
+    .hs-btn:hover { background:var(--y); color:var(--b); }
+    .hs-btn-prev { left:10px; } .hs-btn-next { right:10px; }
+    .hs-dots { position:absolute; bottom:12px; left:50%; transform:translateX(-50%); display:flex; gap:7px; z-index:4; }
+    .hs-dot { width:7px; height:7px; border-radius:50%; background:rgba(255,255,255,.4); border:none; cursor:pointer; transition:all .2s; }
+    .hs-dot.active { background:var(--y); transform:scale(1.3); }
+
+    /* Hero metrics strip */
+    .hero-metrics {
+      position:relative; z-index:2;
+      display:grid; grid-template-columns:repeat(3,1fr);
+      background:rgba(0,0,0,.6); backdrop-filter:blur(14px);
+      border-top:1px solid rgba(245,194,0,.2);
+    }
+    .hero-metric {
+      padding:22px 32px; border-right:1px solid rgba(255,255,255,.07);
+      display:flex; align-items:center; gap:16px;
+    }
+    .hero-metric:last-child { border-right:none; }
+    .hm-num { font-size:36px; font-weight:900; color:var(--y); line-height:1; letter-spacing:-.04em; }
+    .hm-lbl { font-size:11px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.75); }
+    .hm-desc { font-size:10px; color:rgba(255,255,255,.35); margin-top:2px; }
+
+    /* ── SCROLL ANIMATIONS ── */
+    [data-anim] { opacity:0; transform:translateY(38px); transition:opacity .75s ease, transform .75s ease; }
+    [data-anim="left"]  { transform:translateX(-38px); }
+    [data-anim="right"] { transform:translateX(38px); }
+    [data-anim="scale"] { transform:scale(.92); opacity:0; transition:opacity .7s ease, transform .7s ease; }
+    [data-anim].in { opacity:1; transform:none; }
+
+    /* ── TICKER ── */
+    .ticker { background:var(--y); overflow:hidden; padding:13px 0; user-select:none; }
+    .ticker-track { display:flex; white-space:nowrap; animation:tickerMove 42s linear infinite; }
+    @keyframes tickerMove { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+    .ti { padding:0 48px; font-size:12px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:var(--b); }
+    .td { display:inline-block; width:5px; height:5px; border-radius:50%; background:rgba(0,0,0,.35); vertical-align:middle; margin:0 -40px; }
+
+    /* ── SECTION SHARED ── */
+    section { padding:96px 4%; }
+    .wrap { max-width:1280px; margin:0 auto; }
+    .stag { display:inline-flex; align-items:center; gap:8px; background:rgba(245,194,0,.1); color:#9a7700; font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; padding:6px 14px; margin-bottom:20px; }
+    .stag::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--y); }
+    .sh2 { font-size:clamp(24px,3.5vw,44px); font-weight:800; line-height:1.1; letter-spacing:-.025em; margin-bottom:12px; }
+    .sh2-light { color:var(--w); }
+    .ssub { font-size:15px; color:var(--m); line-height:1.75; max-width:520px; margin-bottom:52px; }
+    .ssub-light { color:rgba(255,255,255,.42); }
+
+    /* ── PREVENTA ── */
+    #preventa { background:var(--w); }
+    .preventa-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+    .proj-card { overflow:hidden; border:1px solid #e8e8e8; transition:box-shadow .3s,transform .3s; }
+    .proj-card:hover { box-shadow:0 24px 64px rgba(0,0,0,.12); transform:translateY(-5px); }
+    .proj-img-wrap { overflow:hidden; }
+    .proj-img { width:100%; height:300px; object-fit:cover; transition:transform .55s ease; display:block; }
+    .proj-card:hover .proj-img { transform:scale(1.05); }
+    .proj-body { padding:32px 34px 36px; border-top:4px solid var(--y); }
+    .pill { display:inline-flex; align-items:center; gap:7px; background:var(--y); color:var(--b); font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; padding:5px 13px; margin-bottom:16px; }
+    .pill::before { content:''; width:5px; height:5px; border-radius:50%; background:var(--b); animation:blink 2s ease-in-out infinite; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.25} }
+    .proj-card h3 { font-size:24px; font-weight:800; letter-spacing:-.025em; margin-bottom:10px; }
+    .proj-loc { display:flex; align-items:flex-start; gap:8px; font-size:13px; color:var(--m); line-height:1.55; margin-bottom:16px; }
+    .proj-loc svg { flex-shrink:0; margin-top:2px; }
+    .proj-val { font-size:14px; font-weight:600; color:var(--b); padding-top:16px; border-top:1px solid #f0f0f0; line-height:1.5; }
+    .proj-actions { display:flex; gap:16px; align-items:center; margin-top:22px; flex-wrap:wrap; }
+    .proj-link { font-size:12px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--b); text-decoration:none; padding-bottom:3px; border-bottom:2px solid var(--y); transition:opacity .2s; }
+    .proj-link:hover { opacity:.6; }
+    .proj-detail { font-size:11px; font-weight:600; color:var(--m); text-decoration:none; letter-spacing:.06em; text-transform:uppercase; transition:color .2s; }
+    .proj-detail:hover { color:var(--b); }
+
+    /* ── EN CURSO ── */
+    #en-curso { background:var(--g); }
+    .curso-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .curso-card { background:var(--w); overflow:hidden; transition:box-shadow .3s,transform .3s; }
+    .curso-card:hover { box-shadow:0 12px 40px rgba(0,0,0,.1); transform:translateY(-4px); }
+    .curso-img-wrap { overflow:hidden; }
+    .curso-img { width:100%; height:220px; object-fit:cover; transition:transform .55s; display:block; }
+    .curso-card:hover .curso-img { transform:scale(1.05); }
+    .curso-body { padding:24px 24px 28px; border-top:3px solid transparent; transition:border-color .3s; }
+    .curso-card:hover .curso-body { border-top-color:var(--y); }
+    .cstat { display:flex; align-items:center; gap:7px; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; margin-bottom:12px; }
+    .sdot { width:6px; height:6px; border-radius:50%; flex-shrink:0; }
+    .sg{color:#2e7d32}.dg{background:#2e7d32}
+    .sb{color:#1565c0}.db{background:#1565c0}
+    .sm{color:#888}.dm{background:#aaa}
+    .curso-card h3 { font-size:21px; font-weight:800; letter-spacing:-.025em; margin-bottom:8px; }
+    .curso-note { font-size:13px; color:var(--m); line-height:1.6; }
+    .prog { margin-top:16px; height:3px; background:#e8e8e8; overflow:hidden; }
+    .pbar { height:100%; background:var(--y); }
+    .pdone { background:#bbb; }
+
+    /* ── TRUST + PORTFOLIO ── */
+    #nosotros { background:var(--b); }
+    .trust-top { text-align:center; margin-bottom:72px; }
+    .trust-h2 { color:var(--w); font-size:clamp(26px,4.5vw,52px); font-weight:900; line-height:1.07; letter-spacing:-.03em; margin-bottom:16px; }
+    .trust-h2 em { color:var(--y); font-style:normal; }
+    .trust-sub { color:rgba(255,255,255,.4); font-size:16px; line-height:1.72; margin-bottom:64px; }
+    .trust-nums { display:grid; grid-template-columns:repeat(3,1fr); gap:2px; margin-bottom:56px; }
+    .tnum { padding:48px 28px; background:rgba(255,255,255,.03); border:1px solid rgba(255,255,255,.06); text-align:center; }
+    .tn-n { font-size:62px; font-weight:900; color:var(--y); line-height:1; letter-spacing:-.04em; margin-bottom:12px; }
+    .tn-l { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,.62); }
+    .tn-d { font-size:11px; color:rgba(255,255,255,.26); margin-top:5px; }
+    .trust-tagline { text-align:center; font-size:11px; font-weight:700; letter-spacing:.24em; text-transform:uppercase; color:rgba(255,255,255,.16); margin-bottom:80px; }
+    .portfolio-label { text-align:center; font-size:10px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:24px; }
+    .portfolio-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .port-item { position:relative; overflow:hidden; }
+    .port-item img { width:100%; height:260px; object-fit:cover; filter:brightness(.72); transition:transform .55s,filter .4s; display:block; }
+    .port-item:hover img { transform:scale(1.06); filter:brightness(.9); }
+    .port-overlay { position:absolute; bottom:0; left:0; right:0; padding:28px 20px 16px; background:linear-gradient(to top,rgba(0,0,0,.85) 0%,transparent 100%); }
+    .port-name { color:var(--w); font-size:18px; font-weight:800; letter-spacing:-.02em; }
+    .port-status { color:var(--y); font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; margin-top:4px; }
+
+    /* ── ASESORES ── */
+    #asesores { background:var(--w); }
+    .asesores-viewport { overflow:hidden; position:relative; }
+    .asesores-track { display:flex; gap:24px; transition:transform .55s cubic-bezier(.25,.46,.45,.94); will-change:transform; }
+    .asesor-slide { flex-shrink:0; text-align:center; padding:36px 24px; border:1px solid #ebebeb; background:var(--w); transition:box-shadow .3s,transform .3s; }
+    .asesor-slide:hover { box-shadow:0 16px 48px rgba(0,0,0,.09); transform:translateY(-4px); }
+    .asesor-avatar { width:96px; height:96px; border-radius:50%; margin:0 auto 18px; overflow:hidden; border:3px solid var(--y); }
+    .asesor-avatar img { width:100%; height:100%; object-fit:cover; object-position:center top; }
+    .asesor-initials { width:96px; height:96px; border-radius:50%; margin:0 auto 18px; background:linear-gradient(135deg,#2a2a2a,#404040); border:3px solid var(--y); display:flex; align-items:center; justify-content:center; font-size:26px; font-weight:800; color:var(--y); }
+    .asesor-name { font-size:15px; font-weight:800; letter-spacing:-.01em; margin-bottom:4px; }
+    .asesor-role { font-size:10px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--m); margin-bottom:18px; }
+    .asesor-wa { display:inline-flex; align-items:center; gap:7px; font-size:12px; font-weight:700; color:#25D366; text-decoration:none; padding:9px 18px; border:1px solid rgba(37,211,102,.3); transition:all .2s; }
+    .asesor-wa:hover { background:#25D366; color:var(--w); border-color:#25D366; }
+    .carousel-controls { display:flex; align-items:center; justify-content:center; gap:16px; margin-top:32px; }
+    .car-btn { width:44px; height:44px; border:2px solid #e0e0e0; background:transparent; font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .2s; color:var(--b); }
+    .car-btn:hover { border-color:var(--y); background:var(--y); }
+    .asesor-dots { display:flex; gap:8px; align-items:center; }
+    .asesor-dot { width:7px; height:7px; border-radius:50%; background:#e0e0e0; border:none; cursor:pointer; transition:all .2s; }
+    .asesor-dot.active { background:var(--y); transform:scale(1.3); }
+
+    /* ── CONTACTO ── */
+    #contacto { background:var(--g); }
+    .contacto-grid { display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start; }
+    .contact-eyebrow { display:block; font-size:11px; font-weight:700; letter-spacing:.22em; text-transform:uppercase; color:var(--y); margin-bottom:14px; }
+    .contact-h2 { font-size:clamp(22px,3vw,38px); font-weight:800; letter-spacing:-.025em; line-height:1.12; margin-bottom:12px; }
+    .contact-desc { font-size:15px; color:var(--m); line-height:1.72; margin-bottom:36px; }
+    .contact-items { display:flex; flex-direction:column; gap:18px; }
+    .c-item { display:flex; align-items:flex-start; gap:14px; }
+    .c-icon { width:40px; height:40px; background:rgba(245,194,0,.08); border:1px solid rgba(245,194,0,.2); display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .c-body strong { display:block; font-size:10px; font-weight:700; letter-spacing:.14em; text-transform:uppercase; color:#333; margin-bottom:4px; }
+    .c-body a,.c-body span { font-size:14px; color:var(--m); text-decoration:none; line-height:1.5; display:block; }
+    .c-body a:hover { color:var(--b); }
+    .wa-big { display:inline-flex; align-items:center; gap:10px; margin-top:28px; padding:14px 26px; background:#25D366; color:var(--w); text-decoration:none; font-size:14px; font-weight:700; letter-spacing:.04em; transition:opacity .2s,transform .2s; }
+    .wa-big:hover { opacity:.9; transform:translateY(-2px); }
+    .form-box { background:var(--w); padding:44px 40px; }
+    .form-box h3 { font-size:19px; font-weight:800; letter-spacing:-.015em; margin-bottom:6px; }
+    .form-box p { font-size:13px; color:var(--m); margin-bottom:26px; }
+    .fg { margin-bottom:16px; }
+    .fg label { display:block; font-size:10px; font-weight:700; letter-spacing:.15em; text-transform:uppercase; color:#555; margin-bottom:7px; }
+    .fg input,.fg select,.fg textarea { width:100%; padding:13px 15px; border:1px solid #e0e0e0; background:var(--g); font-family:'Montserrat',sans-serif; font-size:14px; color:var(--b); outline:none; transition:border-color .2s; appearance:none; -webkit-appearance:none; }
+    .fg input:focus,.fg select:focus,.fg textarea:focus { border-color:var(--y); background:var(--w); }
+    .sel-wrap { position:relative; }
+    .sel-wrap::after { content:'▾'; position:absolute; right:14px; top:50%; transform:translateY(-50%); color:#999; pointer-events:none; }
+    .fg textarea { resize:vertical; min-height:80px; }
+    .form-submit { width:100%; margin-top:4px; padding:16px; background:var(--y); color:var(--b); border:none; font-family:'Montserrat',sans-serif; font-size:13px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:opacity .2s,transform .2s; }
+    .form-submit:hover { opacity:.88; transform:translateY(-2px); }
+    .form-note { margin-top:12px; text-align:center; font-size:11px; color:#bbb; }
+
+    /* ── FOOTER ── */
+    footer { background:#0f0f0f; padding:60px 4% 32px; }
+    .footer-inner { max-width:1280px; margin:0 auto; }
+    .footer-top { display:grid; grid-template-columns:1.3fr 1fr 1fr; gap:48px; padding-bottom:44px; border-bottom:1px solid rgba(255,255,255,.07); margin-bottom:28px; }
+    .footer-logo img { height:100px; width:auto; margin-bottom:18px; }
+    .footer-brand { font-size:12px; color:rgba(255,255,255,.26); line-height:1.75; }
+    .footer-col-h { font-size:10px; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:rgba(255,255,255,.88); margin-bottom:18px; }
+    .footer-list { list-style:none; display:flex; flex-direction:column; gap:10px; }
+    .footer-list a,.footer-list span { font-size:13px; color:rgba(255,255,255,.32); text-decoration:none; line-height:1.4; transition:color .2s; display:block; }
+    .footer-list a:hover { color:var(--y); }
+    .footer-bottom { display:flex; align-items:center; justify-content:space-between; }
+    .footer-copy { font-size:12px; color:rgba(255,255,255,.18); }
+    .footer-copy strong { color:var(--y); font-weight:600; }
+
+    /* ── FLOATING WA ── */
+    .wa-float {
+      position:fixed; bottom:28px; right:28px; z-index:998;
+      width:56px; height:56px; border-radius:50%;
+      background:#25D366; color:var(--w);
+      display:flex; align-items:center; justify-content:center;
+      text-decoration:none;
+      box-shadow:0 4px 20px rgba(37,211,102,.45);
+      transition:transform .2s, box-shadow .2s;
+      animation:waPulse 3s ease-in-out infinite;
+    }
+    .wa-float:hover { transform:scale(1.12); box-shadow:0 6px 28px rgba(37,211,102,.6); animation:none; }
+    @keyframes waPulse {
+      0%,100%{ box-shadow:0 4px 20px rgba(37,211,102,.45); }
+      50%{ box-shadow:0 4px 28px rgba(37,211,102,.7),0 0 0 10px rgba(37,211,102,.1); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width:1100px) {
+      .nav-links a { padding:8px 10px; font-size:11px; }
+    }
+    @media (max-width:900px) {
+      .nav-links { display:none; }
+      .nav-hamburger { display:flex; }
+      .hero-body { grid-template-columns:1fr; gap:36px; padding-top:100px; padding-bottom:28px; }
+      .hero-slider-wrap { max-width:280px; margin:0 auto; }
+      .hero-metrics { grid-template-columns:repeat(3,1fr); }
+      .hero-metric { padding:16px 18px; gap:10px; }
+      .hm-num { font-size:28px; }
+      .hm-lbl { font-size:9px; }
+      .hm-desc { display:none; }
+      .preventa-grid { grid-template-columns:1fr; }
+      .curso-grid { grid-template-columns:1fr; }
+      .trust-nums { grid-template-columns:1fr; }
+      .portfolio-grid { grid-template-columns:1fr; }
+      .contacto-grid { grid-template-columns:1fr; gap:40px; }
+      .footer-top { grid-template-columns:1fr; gap:32px; }
+      .footer-bottom { flex-direction:column; gap:8px; text-align:center; }
+      .wa-float { bottom:20px; right:20px; }
+    }
+    @media (max-width:600px) {
+      section { padding:64px 4%; }
+      .form-box { padding:28px 20px; }
+      .hero-ctas { flex-direction:column; }
+      .btn { text-align:center; }
+      .tn-n { font-size:50px; }
+      .proj-img { height:220px; }
+      .curso-img { height:200px; }
+      .trust-h2 { font-size:26px; }
+      .hero-metrics { grid-template-columns:1fr; }
+      .hero-metric { border-right:none; border-bottom:1px solid rgba(255,255,255,.07); padding:14px 24px; }
+      .hero-logo { height:50px; }
+      .port-item img { height:200px; }
+      .wa-float { width:50px; height:50px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#hero" class="nav-logo"><img src="https://i.imgur.com/OoocHQk.png" alt="Constructora Muñoz"></a>
+    <ul class="nav-links">
+      <li><a href="#preventa">Proyectos</a></li>
+      <li><a href="#asesores">Nuestros Asesores</a></li>
+      <li><a href="#contacto">Contáctanos</a></li>
+      <li><a href="#contacto" class="nav-cta">Reserva una cita</a></li>
+    </ul>
+    <div class="nav-hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+  <div class="nav-drawer" id="nav-drawer">
+    <a href="#preventa"  onclick="closeDrawer()">Proyectos</a>
+    <a href="#asesores"  onclick="closeDrawer()">Nuestros Asesores</a>
+    <a href="#contacto"  onclick="closeDrawer()">Contáctanos</a>
+    <a href="#contacto"  onclick="closeDrawer()">Reserva una cita →</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-body">
+      <div>
+        <img src="https://i.imgur.com/OoocHQk.png" alt="Constructora Muñoz" class="hero-logo">
+        <span class="hero-eyebrow">Cochabamba, Bolivia</span>
+        <h1>Inversión en ladrillo:<br><em>Seguridad que<br>no se detiene.</em></h1>
+        <p class="hero-sub">19 proyectos entregados exitosamente respaldan cada compromiso. Tu inversión avanza a paso firme.</p>
+        <div class="hero-ctas">
+          <a href="#contacto" class="btn btn-y">Reserva una cita</a>
+          <a href="#preventa"  class="btn btn-o">Ver proyectos</a>
+        </div>
+      </div>
+      <div class="hero-slider-wrap" id="hero-slider">
+        <div class="hs-slide active"><img src="https://i.imgur.com/CtHbpxV.png" alt="Proyecto Constructora Muñoz"></div>
+        <div class="hs-slide"><img src="https://i.imgur.com/LmKmVrH.png" alt="Proyecto Constructora Muñoz"></div>
+        <button class="hs-btn hs-btn-prev" id="hs-prev">&#8249;</button>
+        <button class="hs-btn hs-btn-next" id="hs-next">&#8250;</button>
+        <div class="hs-dots" id="hs-dots"></div>
+      </div>
+    </div>
+    <div class="hero-metrics">
+      <div class="hero-metric"><div class="hm-num" data-countup="19" data-suffix="">19</div><div><div class="hm-lbl">Proyectos entregados</div><div class="hm-desc">Trayectoria probada en Cochabamba</div></div></div>
+      <div class="hero-metric"><div class="hm-num" data-countup="100" data-suffix="%">100%</div><div><div class="hm-lbl">Cumplimiento de plazos</div><div class="hm-desc">Cada promesa, honrada a tiempo</div></div></div>
+      <div class="hero-metric"><div class="hm-num" data-countup="2" data-suffix="+">2+</div><div><div class="hm-lbl">Proyectos activos</div><div class="hm-desc">Construcción en marcha hoy</div></div></div>
+    </div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span class="ti">Construimos confianza</span><span class="td"></span>
+      <span class="ti">Tu inversión no se detiene</span><span class="td"></span>
+      <span class="ti">Avanzamos a paso firme</span><span class="td"></span>
+      <span class="ti">Otro compromiso cumplido</span><span class="td"></span>
+      <span class="ti">Así se ve cuando inviertes en ladrillo</span><span class="td"></span>
+      <span class="ti">19 proyectos entregados</span><span class="td"></span>
+      <span class="ti">Construimos confianza</span><span class="td"></span>
+      <span class="ti">Tu inversión no se detiene</span><span class="td"></span>
+      <span class="ti">Avanzamos a paso firme</span><span class="td"></span>
+      <span class="ti">Otro compromiso cumplido</span><span class="td"></span>
+      <span class="ti">Así se ve cuando inviertes en ladrillo</span><span class="td"></span>
+      <span class="ti">19 proyectos entregados</span><span class="td"></span>
+    </div>
+  </div>
+
+  <!-- PREVENTA -->
+  <section id="preventa">
+    <div class="wrap">
+      <span class="stag" data-anim>Nuevos lanzamientos</span>
+      <h2 class="sh2" data-anim data-delay=".1">Proyectos en Preventa</h2>
+      <p class="ssub" data-anim data-delay=".2">Oportunidades de inversión en puntos estratégicos de expansión urbana. Precio y condiciones de preventa disponibles para los primeros compradores.</p>
+      <div class="preventa-grid">
+        <div class="proj-card" data-anim data-delay=".1">
+          <div class="proj-img-wrap"><img src="https://i.imgur.com/znY0ulz.png" alt="Abedules Este" class="proj-img"></div>
+          <div class="proj-body">
+            <div class="pill">Preventa Activa</div>
+            <h3>Abedules Este</h3>
+            <div class="proj-loc">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Av. Uyuni, entre Miguel de Aguirre y Bernardo Montenegro, Cochabamba
+            </div>
+            <p class="proj-val">Punto estratégico de expansión urbana — inversión con alta proyección de valorización.</p>
+            <div class="proj-actions">
+              <a href="#contacto" class="proj-link">Solicitar información →</a>
+              <a href="en-construccion.html" class="proj-detail">Ver proyecto completo</a>
+            </div>
+          </div>
+        </div>
+        <div class="proj-card" data-anim data-delay=".22">
+          <div class="proj-img-wrap"><img src="https://i.imgur.com/Y0v0LFP.png" alt="Abedules Norte" class="proj-img"></div>
+          <div class="proj-body">
+            <div class="pill">Preventa Activa</div>
+            <h3>Abedules Norte</h3>
+            <div class="proj-loc">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#aaa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Calle Hermógenes Sejas, entre Miguel de Aguirre y Bernardo Montenegro, Cochabamba
+            </div>
+            <p class="proj-val">Exclusividad basada en confianza histórica — acceso preferencial para clientes anteriores.</p>
+            <div class="proj-actions">
+              <a href="#contacto" class="proj-link">Solicitar información →</a>
+              <a href="en-construccion.html" class="proj-detail">Ver proyecto completo</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EN CURSO -->
+  <section id="en-curso">
+    <div class="wrap">
+      <h2 class="sh2" data-anim>Proyectos en Curso</h2>
+      <p class="ssub" data-anim data-delay=".1">Nuestra cartera activa demuestra continuidad, planificación y un equipo que avanza sin detenerse.</p>
+      <div class="curso-grid">
+        <div class="curso-card" data-anim data-delay=".05">
+          <div class="curso-img-wrap"><img src="https://i.imgur.com/oHXykNe.png" alt="Caoba" class="curso-img"></div>
+          <div class="curso-body">
+            <div class="cstat sg"><span class="sdot dg"></span>En construcción</div>
+            <h3>Caoba</h3>
+            <p class="curso-note">Continuidad garantizada — avance sostenido con financiamiento propio.</p>
+            <div class="prog"><div class="pbar" style="width:55%"></div></div>
+          </div>
+        </div>
+        <div class="curso-card" data-anim data-delay=".18">
+          <div class="curso-img-wrap"><img src="https://i.imgur.com/c519Pbk.png" alt="Estoril Norte" class="curso-img"></div>
+          <div class="curso-body">
+            <div class="cstat sb"><span class="sdot db"></span>Obra gruesa 90%</div>
+            <h3>Estoril Norte</h3>
+            <p class="curso-note">Nuevas unidades en venta — etapa final con entrega próxima garantizada.</p>
+            <div class="prog"><div class="pbar" style="width:90%"></div></div>
+          </div>
+        </div>
+        <div class="curso-card" data-anim data-delay=".30">
+          <div class="curso-img-wrap"><img src="https://i.imgur.com/avFxViU.png" alt="Itauba" class="curso-img"></div>
+          <div class="curso-body">
+            <div class="cstat sm"><span class="sdot dm"></span>Entregado</div>
+            <h3>Itauba</h3>
+            <p class="curso-note">Otro compromiso cumplido — respaldo histórico que habla por sí solo.</p>
+            <div class="prog"><div class="pbar pdone" style="width:100%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST + PORTFOLIO -->
+  <section id="nosotros">
+    <div class="wrap">
+      <div class="trust-top">
+        <h2 class="trust-h2" data-anim>Construimos confianza,<br><em>no solo edificios.</em></h2>
+        <p class="trust-sub" data-anim data-delay=".15">Cada proyecto entregado es una promesa cumplida. Así se ve cuando inviertes en ladrillo.</p>
+        <div class="trust-nums">
+          <div class="tnum" data-anim data-delay=".05">
+            <div class="tn-n" data-countup="19" data-suffix="">19</div>
+            <div class="tn-l">Proyectos entregados</div>
+            <div class="tn-d">En Cochabamba y área metropolitana</div>
+          </div>
+          <div class="tnum" data-anim data-delay=".18">
+            <div class="tn-n" data-countup="100" data-suffix="%">100%</div>
+            <div class="tn-l">Cumplimiento</div>
+            <div class="tn-d">Sin excepciones, sin excusas</div>
+          </div>
+          <div class="tnum" data-anim data-delay=".30">
+            <div class="tn-n" data-countup="2" data-suffix="+">2+</div>
+            <div class="tn-l">Proyectos activos</div>
+            <div class="tn-d">Avanzamos a paso firme</div>
+          </div>
+        </div>
+        <p class="trust-tagline" data-anim>Tu inversión no se detiene &nbsp;·&nbsp; Avanzamos a paso firme</p>
+      </div>
+      <p class="portfolio-label" data-anim>Parte de nuestra trayectoria</p>
+      <div class="portfolio-grid">
+        <div class="port-item" data-anim="left" data-delay=".05">
+          <img src="https://i.imgur.com/IIX0YjG.png" alt="Samay">
+          <div class="port-overlay"><div class="port-name">Samay</div><div class="port-status">Entregado</div></div>
+        </div>
+        <div class="port-item" data-anim="right" data-delay=".05">
+          <img src="https://i.imgur.com/JjvNCjO.png" alt="Ébano">
+          <div class="port-overlay"><div class="port-name">Ébano</div><div class="port-status">Entregado</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ASESORES -->
+  <section id="asesores">
+    <div class="wrap">
+      <span class="stag" data-anim>El equipo</span>
+      <h2 class="sh2" data-anim data-delay=".1">Nuestros Asesores</h2>
+      <p class="ssub" data-anim data-delay=".2">Profesionales comprometidos con tu inversión. Cada asesor conoce los proyectos a fondo y está listo para guiarte en cada paso.</p>
+      <div data-anim data-delay=".15">
+        <div class="asesores-viewport" id="asesores-viewport">
+          <div class="asesores-track" id="asesores-track">
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/rZeyNDm.png" alt="Lina Sarmiento"></div><div class="asesor-name">Lina Sarmiento</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59179985485" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/2eoP2Rd.png" alt="Susana Durán"></div><div class="asesor-name">Susana Durán</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59177865432" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/WAUTnWz.png" alt="Beatriz Herrera"></div><div class="asesor-name">Beatriz Herrera</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59172773955" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/da5Mu4O.png" alt="Gimena Almanza"></div><div class="asesor-name">Gimena Almanza</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59178322515" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/InkbItf.png" alt="Luis Sarmiento"></div><div class="asesor-name">Luis Sarmiento</div><div class="asesor-role">Asesor Comercial</div><a href="https://wa.me/59169426845" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/VdTwu6m.png" alt="Nelson Garcia"></div><div class="asesor-name">Nelson Garcia</div><div class="asesor-role">Asesor Comercial</div><a href="https://wa.me/59170367662" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/LP6shRB.png" alt="Delia Rocha"></div><div class="asesor-name">Delia Rocha</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59179375031" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-avatar"><img src="https://i.imgur.com/kwwNwSP.png" alt="Daniela Muñoz"></div><div class="asesor-name">Daniela Muñoz</div><div class="asesor-role">Asesora Comercial</div><a href="https://wa.me/59161444888" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-initials">SM</div><div class="asesor-name">Sergio Molina</div><div class="asesor-role">Asesor Comercial</div><a href="https://wa.me/59160372479" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+            <div class="asesor-slide"><div class="asesor-initials">JV</div><div class="asesor-name">Javier Villarroel</div><div class="asesor-role">Asesor Comercial</div><a href="https://wa.me/59167407288" target="_blank" rel="noopener" class="asesor-wa"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Contactar</a></div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="car-btn" id="asesor-prev">&#8249;</button>
+          <div class="asesor-dots" id="asesor-dots"></div>
+          <button class="car-btn" id="asesor-next">&#8250;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section id="contacto">
+    <div class="wrap">
+      <div class="contacto-grid">
+        <div data-anim="left">
+          <span class="contact-eyebrow">Agenda tu cita</span>
+          <h2 class="contact-h2">Reserva una cita<br>con nuestro equipo</h2>
+          <p class="contact-desc">Nuestros asesores están listos para mostrarte los proyectos, resolver tus dudas y acompañarte en cada paso de tu inversión. Sin compromiso.</p>
+          <div class="contact-items">
+            <div class="c-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div><div class="c-body"><strong>WhatsApp</strong><a href="https://wa.me/59162739373" target="_blank" rel="noopener">+591 62739373</a></div></div>
+            <div class="c-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5C200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.41a2 2 0 0 1 2-2.18h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div><div class="c-body"><strong>Teléfono</strong><span>(+591) 4 4524819</span></div></div>
+            <div class="c-item"><div class="c-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F5C200" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div><div class="c-body"><strong>Oficina</strong><span>Av. Ballivián #688 entre Chuquisaca y La Paz,<br>Edificio Ave Paraíso, PB, Cochabamba</span></div></div>
+          </div>
+          <a href="https://wa.me/59162739373" target="_blank" rel="noopener" class="wa-big"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Escribinos por WhatsApp</a>
+        </div>
+        <div class="form-box" data-anim="right">
+          <h3>Reservar mi cita</h3>
+          <p>Completá el formulario y te contactamos dentro de las próximas 24 horas.</p>
+          <form onsubmit="submitForm(event)">
+            <div class="fg"><label for="nombre">Nombre completo</label><input type="text" id="nombre" placeholder="Tu nombre completo" required autocomplete="name"></div>
+            <div class="fg"><label for="telefono">WhatsApp / Teléfono</label><input type="tel" id="telefono" placeholder="+591 XXXXXXXX" required autocomplete="tel"></div>
+            <div class="fg"><label for="proyecto">Proyecto de interés</label><div class="sel-wrap"><select id="proyecto" required><option value="" disabled selected>Selecciona un proyecto</option><option value="Abedules Este (Preventa)">Abedules Este (Preventa)</option><option value="Abedules Norte (Preventa)">Abedules Norte (Preventa)</option><option value="Estoril Norte">Estoril Norte</option><option value="Información general">Información general</option></select></div></div>
+            <div class="fg"><label for="mensaje">Mensaje (opcional)</label><textarea id="mensaje" placeholder="¿Qué te gustaría saber?"></textarea></div>
+            <button type="submit" class="form-submit">Reservar mi cita</button>
+            <p class="form-note">Tu información es confidencial y no será compartida.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div class="footer-logo"><img src="https://i.imgur.com/P24YFOm.png" alt="Constructora Muñoz"><p class="footer-brand">Construimos confianza,<br>no solo edificios.<br><br>Cochabamba, Bolivia</p></div>
+        <div><p class="footer-col-h">Proyectos</p><ul class="footer-list"><li><a href="#preventa">Abedules Este</a></li><li><a href="#preventa">Abedules Norte</a></li><li><a href="#en-curso">Estoril Norte</a></li><li><a href="#en-curso">Caoba</a></li><li><a href="#en-curso">Itauba</a></li></ul></div>
+        <div><p class="footer-col-h">Contacto</p><ul class="footer-list"><li><a href="https://wa.me/59162739373" target="_blank" rel="noopener">WhatsApp: 62739373</a></li><li><span>Tel: (+591) 4 4524819</span></li><li><span>Av. Ballivián #688,<br>Edif. Ave Paraíso, PB,<br>Cochabamba, Bolivia</span></li></ul></div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-copy">&copy; 2026 <strong>Constructora Muñoz</strong>. Todos los derechos reservados.</p>
+        <p class="footer-copy">Departamentos en preventa Cochabamba &nbsp;·&nbsp; Bolivia</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Floating WhatsApp -->
+  <a href="https://wa.me/59162739373" class="wa-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <script>
+    /* ── NAV ── */
+    document.getElementById('hamburger').onclick = function() { document.getElementById('nav-drawer').classList.toggle('open'); };
+    function closeDrawer() { document.getElementById('nav-drawer').classList.remove('open'); }
+
+    /* ── HERO SLIDER ── */
+    (function() {
+      var slides = document.querySelectorAll('#hero-slider .hs-slide');
+      var dotsEl = document.getElementById('hs-dots');
+      var curr = 0, timer;
+      slides.forEach(function(_, i) {
+        var d = document.createElement('button');
+        d.className = 'hs-dot' + (i === 0 ? ' active' : '');
+        d.onclick = function() { goTo(i); reset(); };
+        dotsEl.appendChild(d);
+      });
+      function goTo(n) {
+        slides[curr].classList.remove('active');
+        document.querySelectorAll('.hs-dot')[curr].classList.remove('active');
+        curr = ((n % slides.length) + slides.length) % slides.length;
+        slides[curr].classList.add('active');
+        document.querySelectorAll('.hs-dot')[curr].classList.add('active');
+      }
+      function reset() { clearInterval(timer); timer = setInterval(function() { goTo(curr + 1); }, 4500); }
+      document.getElementById('hs-prev').onclick = function() { goTo(curr - 1); reset(); };
+      document.getElementById('hs-next').onclick = function() { goTo(curr + 1); reset(); };
+      timer = setInterval(function() { goTo(curr + 1); }, 4500);
+    })();
+
+    /* ── SCROLL ANIMATIONS ── */
+    if ('IntersectionObserver' in window) {
+      var animObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          var d = parseFloat(el.dataset.delay || 0) * 1000;
+          setTimeout(function() { el.classList.add('in'); }, d);
+          animObs.unobserve(el);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      document.querySelectorAll('[data-anim]').forEach(function(el) { animObs.observe(el); });
+    } else {
+      document.querySelectorAll('[data-anim]').forEach(function(el) { el.classList.add('in'); });
+    }
+
+    /* ── COUNT-UP ── */
+    (function() {
+      var countObs = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (!e.isIntersecting) return;
+          var el = e.target;
+          if (el.dataset.counted) return;
+          el.dataset.counted = '1';
+          var suffix  = el.dataset.suffix || '';
+          var target  = parseInt(el.dataset.countup);
+          var dur     = 1800;
+          var t0      = null;
+          function tick(ts) {
+            if (!t0) t0 = ts;
+            var prog  = Math.min((ts - t0) / dur, 1);
+            var eased = 1 - Math.pow(1 - prog, 3);
+            el.textContent = Math.round(eased * target) + suffix;
+            if (prog < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          countObs.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      document.querySelectorAll('[data-countup]').forEach(function(el) {
+        el.textContent = '0' + (el.dataset.suffix || '');
+        countObs.observe(el);
+      });
+    })();
+
+    /* ── ASESOR CAROUSEL (infinite) ── */
+    (function() {
+      var vp = document.getElementById('asesores-viewport');
+      var track = document.getElementById('asesores-track');
+      var dotsEl = document.getElementById('asesor-dots');
+      var orig = Array.from(track.children);
+      var n = orig.length;
+      var gap = 24, curr = n, locked = false, timer;
+
+      orig.forEach(function(el) { track.appendChild(el.cloneNode(true)); });
+      orig.slice().reverse().forEach(function(el) { track.insertBefore(el.cloneNode(true), track.firstChild); });
+
+      function vis() { return window.innerWidth < 600 ? 1 : window.innerWidth < 900 ? 2 : 3; }
+      function cw()  { return Math.floor((vp.offsetWidth - gap * (vis() - 1)) / vis()); }
+
+      function setW() {
+        var w = cw();
+        Array.from(track.children).forEach(function(c) { c.style.flex = '0 0 ' + w + 'px'; c.style.maxWidth = w + 'px'; });
+        return w;
+      }
+
+      function pos(p, a) {
+        curr = p;
+        track.style.transition = a ? 'transform .55s cubic-bezier(.25,.46,.45,.94)' : 'none';
+        track.style.transform = 'translateX(-' + (p * (cw() + gap)) + 'px)';
+        if (!a) locked = false;
+      }
+
+      track.addEventListener('transitionend', function() {
+        if (curr >= 2 * n) pos(curr - n, false);
+        else if (curr < n) pos(curr + n, false);
+        locked = false;
+        updateDots();
+      });
+
+      function go(d) { if (locked) return; locked = true; pos(curr + d, true); }
+
+      function updateDots() {
+        var r = ((curr - n) % n + n) % n;
+        document.querySelectorAll('.asesor-dot').forEach(function(d, i) { d.classList.toggle('active', i === r); });
+      }
+
+      for (var i = 0; i < n; i++) {
+        (function(idx) {
+          var d = document.createElement('button');
+          d.className = 'asesor-dot' + (idx === 0 ? ' active' : '');
+          d.onclick = function() { pos(n + idx, true); resetTimer(); };
+          dotsEl.appendChild(d);
+        })(i);
+      }
+
+      function resetTimer() { clearInterval(timer); timer = setInterval(function() { go(1); }, 5000); }
+      document.getElementById('asesor-prev').onclick = function() { go(-1); resetTimer(); };
+      document.getElementById('asesor-next').onclick = function() { go(1);  resetTimer(); };
+      document.getElementById('asesores').addEventListener('mouseenter', function() { clearInterval(timer); });
+      document.getElementById('asesores').addEventListener('mouseleave', resetTimer);
+
+      window.addEventListener('load', function() { setW(); pos(n, false); });
+      var rid; window.addEventListener('resize', function() { clearTimeout(rid); rid = setTimeout(function() { setW(); pos(curr, false); }, 120); });
+      timer = setInterval(function() { go(1); }, 5000);
+    })();
+
+    /* ── FORM ── */
+    function submitForm(e) {
+      e.preventDefault();
+      var nombre   = document.getElementById('nombre').value.trim();
+      var telefono = document.getElementById('telefono').value.trim();
+      var proyecto = document.getElementById('proyecto').value;
+      var mensaje  = document.getElementById('mensaje').value.trim();
+      var txt = 'Hola! Quiero reservar una cita.\nNombre: ' + nombre + '\nProyecto: ' + proyecto + '\nContacto: ' + telefono;
+      if (mensaje) txt += '\nMensaje: ' + mensaje;
+      window.open('https://wa.me/59162739373?text=' + encodeURIComponent(txt), '_blank');
+      window.location.href = 'gracias.html';
+    }
+  </script>
+</body>
+</html>

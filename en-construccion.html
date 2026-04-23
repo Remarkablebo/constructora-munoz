@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Próximamente — Constructora Muñoz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Montserrat', sans-serif; color: #1a1a1a; background: #fff; overflow-x: hidden; }
+    img  { display: block; max-width: 100%; }
+    :root { --y:#F5C200; --b:#1a1a1a; --w:#ffffff; --g:#f4f4f2; }
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background:var(--b); height:76px; padding:0 4%;
+      display:flex; align-items:center; justify-content:space-between;
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav-logo img { height:52px; width:auto; }
+    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; }
+    .nav-links a {
+      display:block; padding:8px 14px;
+      color:rgba(255,255,255,.7); text-decoration:none;
+      font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+      transition:color .2s; white-space:nowrap;
+    }
+    .nav-links a:hover { color:var(--y); }
+    .nav-cta { margin-left:6px; background:var(--y)!important; color:var(--b)!important; padding:10px 20px!important; font-weight:700!important; }
+    .nav-cta:hover { opacity:.88; }
+    .nav-hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+    .nav-hamburger span { display:block; width:24px; height:2px; background:var(--w); }
+    .nav-drawer {
+      display:none; position:fixed; top:76px; left:0; right:0;
+      background:#111; padding:20px 5% 28px;
+      border-top:1px solid rgba(255,255,255,.08);
+      flex-direction:column; gap:2px; z-index:999;
+    }
+    .nav-drawer.open { display:flex; }
+    .nav-drawer a { color:rgba(255,255,255,.75); text-decoration:none; font-size:15px; font-weight:600; padding:13px 0; border-bottom:1px solid rgba(255,255,255,.07); }
+    .nav-drawer a:last-child { color:var(--y); border:none; }
+
+    /* MAIN SECTION */
+    .wip-hero {
+      min-height: 100vh;
+      background: var(--b);
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .wip-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url('https://i.imgur.com/EysVCxe.png') center 30%/cover no-repeat;
+      opacity: .1;
+    }
+    .wip-hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; width: 100%; height: 3px;
+      background: var(--y);
+    }
+
+    .wip-box {
+      position: relative; z-index: 2;
+      text-align: center;
+      padding: 60px 32px;
+      max-width: 680px;
+      margin: 0 auto;
+      animation: wipFade .9s ease .1s both;
+    }
+    @keyframes wipFade { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:none} }
+
+    /* Animated construction icon */
+    .wip-icon {
+      width: 88px; height: 88px;
+      background: rgba(245,194,0,.12);
+      border: 2px solid rgba(245,194,0,.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 36px;
+      animation: iconSpin 3s linear infinite;
+    }
+    @keyframes iconSpin {
+      0%,100% { border-color: rgba(245,194,0,.3); }
+      50% { border-color: rgba(245,194,0,.8); }
+    }
+    .wip-icon svg { width: 44px; height: 44px; }
+
+    .wip-tag {
+      display: inline-block;
+      background: rgba(245,194,0,.15); color: var(--y);
+      font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      padding: 6px 16px; border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .wip-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 800;
+      color: var(--w);
+      line-height: 1.15;
+      margin-bottom: 20px;
+    }
+    .wip-title span { color: var(--y); }
+
+    .wip-sub {
+      font-size: 1.05rem;
+      color: rgba(255,255,255,.6);
+      line-height: 1.75;
+      margin-bottom: 40px;
+    }
+
+    /* Progress bar */
+    .wip-progress {
+      margin: 0 auto 40px;
+      max-width: 360px;
+    }
+    .wip-progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 8px;
+    }
+    .wip-progress-track {
+      height: 4px; background: rgba(255,255,255,.08); border-radius: 2px; overflow: hidden;
+    }
+    .wip-progress-fill {
+      height: 100%; background: var(--y); border-radius: 2px;
+      width: 0;
+      transition: width 1.6s cubic-bezier(.25,.1,.25,1) .5s;
+    }
+
+    .wip-actions {
+      display: flex; flex-wrap: wrap; gap: 14px; justify-content: center;
+    }
+
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: #25D366; color: #fff;
+      text-decoration: none; font-size: 14px; font-weight: 700;
+      padding: 14px 28px; border-radius: 6px;
+      transition: opacity .2s;
+    }
+    .btn-wa:hover { opacity: .88; }
+    .btn-wa svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: rgba(255,255,255,.7);
+      text-decoration: none; font-size: 14px; font-weight: 600;
+      padding: 14px 28px; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,.2);
+      transition: border-color .2s, color .2s;
+    }
+    .btn-home:hover { border-color: var(--y); color: var(--y); }
+
+    .wip-note {
+      margin-top: 44px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      color: rgba(255,255,255,.3); font-size: 12px;
+    }
+    .wip-note::before, .wip-note::after {
+      content: ''; flex: 1; height: 1px;
+      background: rgba(255,255,255,.08);
+      max-width: 80px;
+    }
+
+    /* FOOTER */
+    footer {
+      background: #111; color: rgba(255,255,255,.45);
+      padding: 36px 4% 28px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      text-align: center;
+    }
+    footer img { height: 52px; width: auto; opacity: .8; }
+    footer p { font-size: 12px; line-height: 1.6; }
+
+    /* Floating WA */
+    .wa-float {
+      position: fixed; bottom: 28px; right: 28px; z-index: 900;
+      width: 58px; height: 58px;
+      background: #25D366; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,.45);
+      text-decoration: none;
+      animation: waPulse 2.5s ease-in-out infinite;
+    }
+    @keyframes waPulse {
+      0%,100%{box-shadow:0 4px 20px rgba(37,211,102,.45)}
+      50%{box-shadow:0 4px 32px rgba(37,211,102,.75),0 0 0 8px rgba(37,211,102,.12)}
+    }
+    .wa-float svg { width: 30px; height: 30px; }
+
+    @media (max-width: 600px) {
+      .wip-box { padding: 60px 20px; }
+      .wip-actions { flex-direction: column; align-items: stretch; }
+      .btn-wa, .btn-home { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="index.html">
+    <img src="https://i.imgur.com/OoocHQk.png" alt="Constructora Muñoz">
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html#proyectos">Proyectos</a></li>
+    <li><a href="index.html#asesores">Nuestros Asesores</a></li>
+    <li><a href="index.html#contacto">Contáctanos</a></li>
+    <li><a class="nav-cta" href="index.html#contacto">Reserva una cita</a></li>
+  </ul>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html#proyectos" onclick="toggleMenu()">Proyectos</a>
+  <a href="index.html#asesores" onclick="toggleMenu()">Nuestros Asesores</a>
+  <a href="index.html#contacto" onclick="toggleMenu()">Contáctanos</a>
+  <a href="index.html#contacto" onclick="toggleMenu()">Reserva una cita</a>
+</div>
+
+<!-- UNDER CONSTRUCTION SECTION -->
+<section class="wip-hero">
+  <div class="wip-box">
+
+    <div class="wip-icon">
+      <!-- Helmet / construction icon -->
+      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M8 32h32M10 32c0-11.046 6.268-20 14-20s14 8.954 14 20" stroke="#F5C200" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M24 12V6M16 14l-3-5M32 14l3-5" stroke="#F5C200" stroke-width="2.5" stroke-linecap="round"/>
+        <rect x="6" y="32" width="36" height="6" rx="2" fill="#F5C200" fill-opacity=".2" stroke="#F5C200" stroke-width="2"/>
+      </svg>
+    </div>
+
+    <div class="wip-tag">Próximamente</div>
+
+    <h1 class="wip-title">Página en<br><span>construcción</span></h1>
+    <p class="wip-sub">
+      Estamos trabajando para brindarte más información sobre este proyecto.<br>
+      Mientras tanto, contáctanos directamente — con gusto te atendemos.
+    </p>
+
+    <div class="wip-progress">
+      <div class="wip-progress-label">
+        <span>En desarrollo</span>
+        <span id="progPct">0%</span>
+      </div>
+      <div class="wip-progress-track">
+        <div class="wip-progress-fill" id="progFill"></div>
+      </div>
+    </div>
+
+    <div class="wip-actions">
+      <a class="btn-wa" href="https://wa.me/59162739373" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+          <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.121 1.535 5.847L.057 23.882l6.198-1.624A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.68.965.981-3.585-.234-.369A9.818 9.818 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/>
+        </svg>
+        Consultar por WhatsApp
+      </a>
+      <a class="btn-home" href="index.html">
+        ← Volver al inicio
+      </a>
+    </div>
+
+    <p class="wip-note">Constructora Muñoz · Cochabamba, Bolivia</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <img src="https://i.imgur.com/P24YFOm.png" alt="Constructora Muñoz">
+  <p>Av. Ballivián #688 entre Chuquisaca y La Paz, Edificio Ave Paraíso, Planta Baja — Cochabamba, Bolivia<br>
+  WhatsApp: <a href="https://wa.me/59162739373" style="color:var(--y);text-decoration:none;">+591 62739373</a> · Tel: (+591) 4 4524819</p>
+  <p>© 2026 Constructora Muñoz. Todos los derechos reservados.</p>
+</footer>
+
+<!-- Floating WA -->
+<a class="wa-float" href="https://wa.me/59162739373" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.559 4.121 1.535 5.847L.057 23.882l6.198-1.624A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.007-1.373l-.36-.214-3.68.965.981-3.585-.234-.369A9.818 9.818 0 012.182 12C2.182 6.578 6.578 2.182 12 2.182S21.818 6.578 21.818 12 17.422 21.818 12 21.818z"/>
+  </svg>
+</a>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('navDrawer').classList.toggle('open');
+  }
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 10) document.getElementById('navDrawer').classList.remove('open');
+  });
+  function checkNav() {
+    var ham = document.getElementById('hamburger');
+    var links = document.getElementById('navLinks');
+    if (window.innerWidth <= 900) {
+      ham.style.display = 'flex';
+      links.style.display = 'none';
+    } else {
+      ham.style.display = 'none';
+      links.style.display = 'flex';
+      document.getElementById('navDrawer').classList.remove('open');
+    }
+  }
+  checkNav();
+  window.addEventListener('resize', checkNav);
+
+  /* Animate progress bar to 65% */
+  window.addEventListener('load', function() {
+    var fill = document.getElementById('progFill');
+    var pct  = document.getElementById('progPct');
+    var target = 65, dur = 1600, t0 = null;
+    function tick(ts) {
+      if (!t0) t0 = ts;
+      var p = Math.min((ts - t0) / dur, 1);
+      var e = 1 - Math.pow(1 - p, 3);
+      var v = Math.round(e * target);
+      fill.style.width = v + '%';
+      pct.textContent = v + '%';
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    setTimeout(function() { requestAnimationFrame(tick); }, 400);
+  });
+</script>
+</body>
+</html>
