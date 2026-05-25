@@ -362,59 +362,6 @@
     .mod-price-item.wide { max-width: 280px; line-height: 1.5; }
 
     /* ────────────────────────────
-       PRICING TABLE
-    ──────────────────────────── */
-    .pricing-wrap {
-      background: var(--black);
-      padding: 100px 64px;
-    }
-    .pricing-hd { margin-bottom: 56px; }
-
-    table.inv-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 36px;
-    }
-    .inv-table th {
-      font-size: 10px; font-weight: 700;
-      letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(255,255,255,.28);
-      padding: 14px 22px;
-      text-align: left;
-      border-bottom: 1px solid rgba(255,255,255,.07);
-    }
-    .inv-table td {
-      padding: 16px 22px;
-      font-size: 14px; color: rgba(255,255,255,.72);
-      border-bottom: 1px solid rgba(255,255,255,.04);
-    }
-    .inv-table tr:last-child td { border-bottom: none; }
-    .inv-table tr:hover td { background: rgba(255,255,255,.02); }
-    .inv-table td:first-child { font-weight: 600; color: var(--white); }
-    .py { color: var(--yellow); font-weight: 700; }
-    .pm { font-size: 11.5px; color: rgba(255,255,255,.35); }
-
-    .callout-box {
-      border: 1px solid rgba(245,194,0,.6);
-      padding: 30px 36px;
-      position: relative;
-    }
-    .callout-box::before {
-      content: 'VALOR TOTAL';
-      position: absolute; top: -10px; left: 22px;
-      background: var(--black);
-      padding: 0 12px;
-      font-size: 9.5px; font-weight: 800;
-      letter-spacing: .22em;
-      color: var(--yellow);
-    }
-    .callout-box p {
-      font-size: 15.5px; line-height: 1.75;
-      color: rgba(255,255,255,.75);
-    }
-    .callout-box strong { color: var(--yellow); }
-
-    /* ────────────────────────────
        CTA
     ──────────────────────────── */
     .cta-wrap {
@@ -484,7 +431,7 @@
       .mod-body   { border: none !important; padding: 40px 36px; }
     }
     @media (max-width: 768px) {
-      .hero, .problems, .modules-wrap, .pricing-wrap, .cta-wrap, footer {
+      .hero, .problems, .modules-wrap, .cta-wrap, footer {
         padding-left: 28px; padding-right: 28px;
       }
       .nav { padding: 0 24px; }
@@ -495,7 +442,7 @@
     }
     @media (max-width: 540px) {
       .prob-grid { grid-template-columns: 1fr; }
-      .hero, .problems, .modules-wrap, .pricing-wrap, .cta-wrap, footer {
+      .hero, .problems, .modules-wrap, .cta-wrap, footer {
         padding-left: 20px; padding-right: 20px;
       }
       .btn-wa { width: 100%; justify-content: center; }
@@ -781,67 +728,6 @@
       </div>
     </div>
 
-  </section>
-
-  <!-- ══ PRECIOS ═══════════════════════════ -->
-  <section class="pricing-wrap" id="precios">
-    <div class="section-wrap">
-      <div class="pricing-hd reveal">
-        <span class="eyebrow e-faint">Inversión</span>
-        <h2 class="sec-title light">Resumen de inversión</h2>
-      </div>
-
-      <table class="inv-table reveal">
-        <thead>
-          <tr>
-            <th>Módulo</th>
-            <th>Implementación</th>
-            <th>Mensual</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Página Web (básica)</td>
-            <td class="py">$100–150</td>
-            <td><span class="py">$70</span><span class="pm">/mes</span></td>
-          </tr>
-          <tr>
-            <td>Página Web + Captura de datos</td>
-            <td class="py">$130–150</td>
-            <td><span class="py">$100</span><span class="pm">/mes</span></td>
-          </tr>
-          <tr>
-            <td>Sistema CRM Remarkable</td>
-            <td class="py">$100–150</td>
-            <td><span class="py">$300</span><span class="pm">/mes</span></td>
-          </tr>
-          <tr>
-            <td>Espacio por asesor <span class="pm">(add-on)</span></td>
-            <td class="pm">—</td>
-            <td><span class="py">$30</span><span class="pm">/asesor/mes</span></td>
-          </tr>
-          <tr>
-            <td>Bot WhatsApp empresa</td>
-            <td class="py">$100</td>
-            <td><span class="py">$50</span><span class="pm">/mes</span></td>
-          </tr>
-          <tr>
-            <td>Bot WhatsApp por asesor <span class="pm">(add-on)</span></td>
-            <td class="py">$50<span class="pm">/asesor</span></td>
-            <td><span class="py">$30</span><span class="pm">/asesor/mes</span></td>
-          </tr>
-          <tr>
-            <td>Inteligencia Artificial</td>
-            <td class="pm">A cotizar</td>
-            <td class="pm">A cotizar</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <div class="callout-box reveal">
-        <p>Con los 4 módulos principales — Web + CRM + 10 Asesores + Bot empresa — tu inversión mensual total sería de <strong>$750/mes</strong>, con un setup inicial de aproximadamente <strong>$450–500</strong>.</p>
-      </div>
-    </div>
   </section>
 
   <!-- ══ CTA ════════════════════════════════ -->
