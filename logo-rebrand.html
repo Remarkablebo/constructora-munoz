@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renovación de Identidad Visual — Constructora Muñoz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #090909;
+      --bg-card:    #111111;
+      --bg-card-2:  #161616;
+      --border:     #222222;
+      --border-dim: #1a1a1a;
+      --gold:       #F5C200;
+      --gold-dim:   #a07e00;
+      --red:        #ED1C24;
+      --white:      #ffffff;
+      --white-dim:  #999999;
+      --white-muted:#444444;
+      --font:       'Montserrat', sans-serif;
+      --radius:     16px;
+      --ease:       cubic-bezier(.4, 0, .2, 1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--white);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+      opacity: .4;
+    }
+
+    /* ─── LAYOUT ─── */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      padding: 80px 0 60px;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 2px;
+      background: var(--gold);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,194,0,.08);
+      border: 1px solid rgba(245,194,0,.2);
+      color: var(--gold);
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 32px;
+    }
+
+    .badge .dot {
+      width: 6px;
+      height: 6px;
+      background: var(--gold);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: .4; transform: scale(.7); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -.02em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span { color: var(--gold); }
+
+    .hero p {
+      font-size: 1rem;
+      color: var(--white-dim);
+      font-weight: 400;
+      letter-spacing: .03em;
+    }
+
+    /* ─── SECTION LABEL ─── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+
+    .section-label::before,
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .section-label span {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      white-space: nowrap;
+    }
+
+    /* ─── COMPARISON SECTION ─── */
+    .section { padding: 80px 0; border-bottom: 1px solid var(--border-dim); }
+
+    .format-block { margin-bottom: 80px; }
+    .format-block:last-child { margin-bottom: 0; }
+
+    .format-title {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 0;
+      align-items: center;
+    }
+
+    .logo-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 32px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+      transition: border-color .3s var(--ease), background .3s var(--ease);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-card:hover {
+      border-color: #333;
+      background: var(--bg-card-2);
+    }
+
+    .logo-card.is-new {
+      border-color: rgba(245,194,0,.25);
+      background: rgba(245,194,0,.03);
+    }
+
+    .logo-card.is-new:hover {
+      border-color: rgba(245,194,0,.4);
+      background: rgba(245,194,0,.05);
+    }
+
+    .logo-card.is-new::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--radius);
+      box-shadow: 0 0 60px rgba(245,194,0,.04) inset;
+      pointer-events: none;
+    }
+
+    .card-label {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .card-label.old {
+      background: rgba(255,255,255,.06);
+      color: var(--white-dim);
+      border: 1px solid rgba(255,255,255,.08);
+    }
+
+    .card-label.new {
+      background: rgba(245,194,0,.12);
+      color: var(--gold);
+      border: 1px solid rgba(245,194,0,.25);
+    }
+
+    .logo-card img {
+      width: 100%;
+      max-width: 440px;
+      height: auto;
+      display: block;
+      object-fit: contain;
+    }
+
+    .logo-card.vertical img {
+      max-width: 240px;
+    }
+
+    /* ─── DIVIDER ARROW ─── */
+    .vs-divider {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      padding: 0 32px;
+    }
+
+    .vs-line {
+      width: 1px;
+      height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--border), transparent);
+    }
+
+    .vs-badge {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .55rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: var(--white-muted);
+    }
+
+    .arrow-icon {
+      color: var(--gold);
+      opacity: .6;
+      font-size: 1.2rem;
+    }
+
+    /* ─── CHANGES SECTION ─── */
+    .changes-section { padding: 80px 0; }
+
+    .changes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .change-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s var(--ease);
+    }
+
+    .change-card:hover { border-color: #333; }
+
+    .change-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--gold);
+      opacity: .5;
+    }
+
+    .change-number {
+      font-size: .6rem;
+      font-weight: 800;
+      letter-spacing: .15em;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .change-title {
+      font-size: 1.1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 12px;
+      letter-spacing: -.01em;
+    }
+
+    .change-desc {
+      font-size: .85rem;
+      line-height: 1.65;
+      color: var(--white-dim);
+      font-weight: 400;
+    }
+
+    .change-detail {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .detail-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: .8rem;
+    }
+
+    .detail-row .tag {
+      font-size: .6rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .tag.before {
+      background: rgba(255,255,255,.06);
+      color: var(--white-muted);
+    }
+
+    .tag.after {
+      background: rgba(245,194,0,.12);
+      color: var(--gold);
+    }
+
+    .detail-row .detail-text {
+      color: var(--white-dim);
+      line-height: 1.5;
+    }
+
+    /* ─── FOOTER ─── */
+    .footer {
+      padding: 48px 0;
+      border-top: 1px solid var(--border-dim);
+      text-align: center;
+    }
+
+    .footer-logo {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--white-muted);
+      margin-bottom: 8px;
+    }
+
+    .footer-sub {
+      font-size: .75rem;
+      color: var(--white-muted);
+      opacity: .5;
+    }
+
+    /* ─── REVEAL ANIMATION ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: .1s; }
+    .reveal-delay-2 { transition-delay: .2s; }
+    .reveal-delay-3 { transition-delay: .3s; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .comparison-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+
+      .vs-divider {
+        flex-direction: row;
+        padding: 0;
+      }
+
+      .vs-line {
+        width: 60px;
+        height: 1px;
+        background: linear-gradient(to right, transparent, var(--border), transparent);
+      }
+
+      .changes-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero { padding: 60px 0 48px; }
+      .section { padding: 60px 0; }
+      .logo-card { padding: 32px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ─── HERO ─── -->
+  <div class="container">
+    <div class="hero">
+      <div class="badge">
+        <div class="dot"></div>
+        Presentación interna · Mayo 2026
+      </div>
+      <h1>Renovación de<br><span>Identidad Visual</span></h1>
+      <p>Constructora Muñoz — Propuesta de rediseño de logotipo</p>
+    </div>
+  </div>
+
+  <!-- ─── COMPARISON ─── -->
+  <div class="section">
+    <div class="container">
+
+      <div class="section-label reveal">
+        <span>Comparativa de logotipo</span>
+      </div>
+
+      <!-- HORIZONTAL -->
+      <div class="format-block">
+        <p class="format-title reveal">Versión Horizontal</p>
+        <div class="comparison-grid">
+
+          <div class="logo-card reveal reveal-delay-1">
+            <div class="card-label old">Anterior</div>
+            <img src="https://i.imgur.com/7M0ttGr.png" alt="Logotipo anterior versión horizontal" loading="lazy">
+          </div>
+
+          <div class="vs-divider reveal">
+            <div class="vs-line"></div>
+            <div class="vs-badge">VS</div>
+            <div class="arrow-icon">→</div>
+            <div class="vs-line"></div>
+          </div>
+
+          <div class="logo-card is-new reveal reveal-delay-2">
+            <div class="card-label new">Nuevo</div>
+            <img src="https://i.imgur.com/I8FBFIa.png" alt="Logotipo nuevo versión horizontal" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+
+      <!-- VERTICAL -->
+      <div class="format-block">
+        <p class="format-title reveal">Versión Vertical</p>
+        <div class="comparison-grid">
+
+          <div class="logo-card vertical reveal reveal-delay-1">
+            <div class="card-label old">Anterior</div>
+            <img src="https://i.imgur.com/tQuT2nH.png" alt="Logotipo anterior versión vertical" loading="lazy">
+          </div>
+
+          <div class="vs-divider reveal">
+            <div class="vs-line"></div>
+            <div class="vs-badge">VS</div>
+            <div class="arrow-icon">→</div>
+            <div class="vs-line"></div>
+          </div>
+
+          <div class="logo-card vertical is-new reveal reveal-delay-2">
+            <div class="card-label new">Nuevo</div>
+            <img src="https://i.imgur.com/m8Geare.png" alt="Logotipo nuevo versión vertical" loading="lazy">
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── QUÉ CAMBIÓ ─── -->
+  <div class="changes-section">
+    <div class="container">
+
+      <div class="section-label reveal">
+        <span>Qué cambió y por qué</span>
+      </div>
+
+      <div class="changes-grid">
+
+        <div class="change-card reveal reveal-delay-1">
+          <div class="change-number">01 — FORMA</div>
+          <div class="change-title">De ángulos rectos a formas redondeadas</div>
+          <div class="change-desc">
+            El ícono geométrico principal evoluciona de esquinas cuadradas a esquinas redondeadas, transmitiendo modernidad, accesibilidad y solidez sin rigidez.
+          </div>
+          <div class="change-detail">
+            <div class="detail-row">
+              <span class="tag before">Antes</span>
+              <span class="detail-text">Esquinas a 90° — imagen técnica, algo severa</span>
+            </div>
+            <div class="detail-row">
+              <span class="tag after">Nuevo</span>
+              <span class="detail-text">Bordes suavizados — confianza, modernidad, profesionalismo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="change-card reveal reveal-delay-2">
+          <div class="change-number">02 — TIPOGRAFÍA</div>
+          <div class="change-title">«Constructora» más estilizada</div>
+          <div class="change-desc">
+            La palabra CONSTRUCTORA adopta una tipografía con más personalidad y ritmo visual, mejorando la lectura y reforzando la identidad diferenciadora de la marca.
+          </div>
+          <div class="change-detail">
+            <div class="detail-row">
+              <span class="tag before">Antes</span>
+              <span class="detail-text">Sans-serif convencional, peso neutro, poca personalidad</span>
+            </div>
+            <div class="detail-row">
+              <span class="tag after">Nuevo</span>
+              <span class="detail-text">Tipografía estilizada, tracking refinado, más carácter</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="change-card reveal reveal-delay-3">
+          <div class="change-number">03 — NOMBRE</div>
+          <div class="change-title">«Muñoz» más moderno, igual de fuerte</div>
+          <div class="change-desc">
+            La tipografía del apellido mantiene su peso y protagonismo, pero con una fuente contemporánea que proyecta autoridad sin verse antigua.
+          </div>
+          <div class="change-detail">
+            <div class="detail-row">
+              <span class="tag before">Antes</span>
+              <span class="detail-text">Fuente bold clásica, impacto visual directo pero sin evolución</span>
+            </div>
+            <div class="detail-row">
+              <span class="tag after">Nuevo</span>
+              <span class="detail-text">Bold moderno, trazos actualizados — fuerte y contemporáneo</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ─── FOOTER ─── -->
+  <div class="footer">
+    <div class="container">
+      <div class="footer-logo">Remarkable Agency</div>
+      <div class="footer-sub">Propuesta confidencial · Constructora Muñoz · Mayo 2026</div>
+    </div>
+  </div>
+
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Make hero visible immediately
+    document.querySelectorAll('.hero .reveal, .hero *').forEach(el => {
+      el.classList.add('visible');
+    });
+  </script>
+
+</body>
+</html>
