@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Digital 2026 — Constructora Muñoz × Remarkable</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:       #1a1a1a;
+      --yellow:      #F5C200;
+      --yellow-dim:  #B8900A;
+      --red:         #ED1C24;
+      --red-dark:    #8E1A23;
+      --white:       #ffffff;
+      --gray-bg:     #F4F4F4;
+      --gray-line:   #E0E0E0;
+      --gray-mid:    #727373;
+      --gray-dark:   #444444;
+      --green-wa:    #128C7E;
+      --font:        'Montserrat', sans-serif;
+      --ease:        cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ────────────────────────────
+       NAVBAR
+    ──────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-line);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      transition: box-shadow .3s var(--ease);
+    }
+    .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.07); }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-tag {
+      font-size: 10.5px; font-weight: 600;
+      letter-spacing: .14em; text-transform: uppercase;
+      color: var(--gray-mid);
+    }
+    .nav-tag strong { color: var(--black); font-weight: 700; }
+
+    /* ────────────────────────────
+       HERO
+    ──────────────────────────── */
+    .hero {
+      background: var(--black);
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    /* grid pattern */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(245,194,0,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,194,0,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    /* yellow left accent */
+    .hero::after {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--yellow) 0%, transparent 80%);
+    }
+
+    .hero-wrap {
+      max-width: 1160px; margin: 0 auto; width: 100%;
+      position: relative; z-index: 2;
+    }
+
+    .hero-brands {
+      display: flex; align-items: center; gap: 18px;
+      margin-bottom: 52px;
+      opacity: 0; animation: riseIn .8s var(--ease) forwards .2s;
+    }
+    .hero-brands img {
+      height: 26px; width: auto;
+      opacity: 1;
+    }
+    .hero-brands .x {
+      font-size: 17px; color: var(--yellow);
+      font-weight: 300; line-height: 1;
+    }
+
+    .hero-eyebrow {
+      display: block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 24px;
+      opacity: 0; animation: riseIn .8s var(--ease) forwards .4s;
+    }
+
+    .hero h1 {
+      font-size: clamp(38px, 5.5vw, 72px);
+      font-weight: 900; line-height: 1.08; letter-spacing: -.02em;
+      color: var(--white);
+      max-width: 860px;
+      margin-bottom: 28px;
+      opacity: 0; animation: riseIn .8s var(--ease) forwards .6s;
+    }
+    .hero h1 em { font-style: normal; color: var(--yellow); }
+
+    .hero-sub {
+      font-size: 17px; font-weight: 400; line-height: 1.7;
+      color: rgba(255,255,255,.55);
+      max-width: 560px;
+      margin-bottom: 48px;
+      opacity: 0; animation: riseIn .8s var(--ease) forwards .8s;
+    }
+
+    .btn-cta {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: var(--font);
+      font-size: 12px; font-weight: 800;
+      letter-spacing: .14em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 17px 36px;
+      position: relative; overflow: hidden;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+      opacity: 0; animation: riseIn .8s var(--ease) forwards 1s;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(245,194,0,.35);
+    }
+    .btn-cta svg { transition: transform .25s var(--ease); }
+    .btn-cta:hover svg { transform: translateX(5px); }
+
+    .hero-deco {
+      position: absolute; right: 60px; bottom: 40px;
+      font-size: 240px; font-weight: 900;
+      color: rgba(245,194,0,.028);
+      line-height: 1; letter-spacing: -.06em;
+      user-select: none; pointer-events: none;
+    }
+
+    /* ────────────────────────────
+       SHARED UTILITIES
+    ──────────────────────────── */
+    .section-wrap { max-width: 1160px; margin: 0 auto; }
+
+    .eyebrow {
+      display: block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .22em; text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .eyebrow.e-red   { color: var(--red); }
+    .eyebrow.e-dim   { color: var(--gray-mid); }
+    .eyebrow.e-yellow{ color: var(--yellow-dim); }
+    .eyebrow.e-faint { color: rgba(255,255,255,.3); }
+
+    .sec-title {
+      font-size: clamp(28px, 3.8vw, 46px);
+      font-weight: 800; line-height: 1.12; letter-spacing: -.02em;
+    }
+    .sec-title.light { color: var(--white); }
+
+    .sec-sub {
+      font-size: 16px; line-height: 1.7;
+      color: var(--gray-mid);
+      max-width: 520px;
+      margin-top: 14px;
+    }
+    .sec-sub.light { color: rgba(255,255,255,.55); }
+
+    /* scroll-reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity .7s var(--ease), transform .7s var(--ease);
+    }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; }
+    .d2 { transition-delay: .2s; }
+    .d3 { transition-delay: .3s; }
+    .d4 { transition-delay: .4s; }
+
+    /* ────────────────────────────
+       PROBLEMS
+    ──────────────────────────── */
+    .problems {
+      background: var(--gray-bg);
+      padding: 100px 64px;
+    }
+    .problems-hd { margin-bottom: 64px; }
+
+    .prob-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .prob-card {
+      background: var(--white);
+      padding: 36px 30px;
+      position: relative;
+      transition: transform .3s var(--ease), box-shadow .3s var(--ease);
+    }
+    .prob-card::after {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--gray-line);
+      transition: background .3s var(--ease);
+    }
+    .prob-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.07);
+    }
+    .prob-card:hover::after { background: var(--red); }
+
+    .prob-icon {
+      width: 40px; height: 40px;
+      margin-bottom: 22px;
+      color: var(--gray-dark);
+    }
+    .prob-card h3 {
+      font-size: 15px; font-weight: 700;
+      line-height: 1.35; margin-bottom: 10px;
+    }
+    .prob-card p { font-size: 13px; line-height: 1.65; color: var(--gray-mid); }
+
+    /* ────────────────────────────
+       MODULES
+    ──────────────────────────── */
+    .modules-wrap { padding: 100px 64px; background: var(--white); }
+    .modules-hd   { margin-bottom: 72px; }
+
+    .mod-card {
+      display: grid;
+      grid-template-columns: 420px 1fr;
+      max-width: 1160px;
+      margin: 0 auto 36px;
+      overflow: hidden;
+      box-shadow: 0 2px 24px rgba(0,0,0,.06);
+      transition: box-shadow .3s var(--ease);
+    }
+    .mod-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,.11); }
+    .mod-card.flip { direction: rtl; }
+    .mod-card.flip > * { direction: ltr; }
+
+    .mod-visual {
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      padding: 52px;
+      min-height: 340px;
+    }
+    .mod-visual .big-num {
+      position: absolute; bottom: -16px; right: 12px;
+      font-size: 160px; font-weight: 900; line-height: 1;
+      letter-spacing: -.06em;
+      opacity: .09; color: inherit;
+      user-select: none;
+    }
+
+    .mod-icon {
+      width: 76px; height: 76px;
+      position: relative; z-index: 1;
+    }
+
+    .mod-body {
+      background: var(--white);
+      padding: 52px 56px;
+      display: flex; flex-direction: column; justify-content: center;
+      border-left: 1px solid var(--gray-line);
+    }
+    .mod-card.flip .mod-body {
+      border-left: none;
+      border-right: 1px solid var(--gray-line);
+    }
+
+    .mod-tag {
+      display: inline-flex; align-items: center; gap: 9px;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--gray-mid);
+      margin-bottom: 18px;
+    }
+    .mod-num-badge {
+      width: 22px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 800;
+      color: var(--white);
+    }
+
+    .mod-body h3 {
+      font-size: clamp(20px, 2.2vw, 27px);
+      font-weight: 800; line-height: 1.2;
+      letter-spacing: -.01em;
+      margin-bottom: 14px;
+    }
+    .mod-quote {
+      font-size: 13.5px; font-style: italic;
+      color: var(--gray-mid); line-height: 1.65;
+      margin-bottom: 18px;
+    }
+    .mod-desc {
+      font-size: 14.5px; line-height: 1.72;
+      color: var(--gray-dark);
+      margin-bottom: 26px;
+    }
+
+    .mod-list {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+    .mod-list li {
+      font-size: 13px; color: var(--gray-dark);
+      padding: 7px 0;
+      display: flex; align-items: center; gap: 10px;
+      border-bottom: 1px solid var(--gray-line);
+    }
+    .mod-list li:last-child { border-bottom: none; }
+    .dot {
+      width: 7px; height: 7px;
+      flex-shrink: 0; display: inline-block;
+    }
+
+    .mod-price-row {
+      display: inline-flex; align-items: center; gap: 0;
+      background: var(--gray-bg);
+      align-self: flex-start;
+      overflow: hidden;
+    }
+    .mod-price-item {
+      padding: 13px 22px;
+      font-size: 13px; font-weight: 600;
+      color: var(--black);
+    }
+    .mod-price-item + .mod-price-item {
+      border-left: 1px solid var(--gray-line);
+    }
+    .mod-price-item small {
+      font-weight: 400; color: var(--gray-mid); font-size: 11.5px;
+    }
+    .mod-price-item.wide { max-width: 280px; line-height: 1.5; }
+
+    /* ────────────────────────────
+       PRICING TABLE
+    ──────────────────────────── */
+    .pricing-wrap {
+      background: var(--black);
+      padding: 100px 64px;
+    }
+    .pricing-hd { margin-bottom: 56px; }
+
+    table.inv-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 36px;
+    }
+    .inv-table th {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: rgba(255,255,255,.28);
+      padding: 14px 22px;
+      text-align: left;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .inv-table td {
+      padding: 16px 22px;
+      font-size: 14px; color: rgba(255,255,255,.72);
+      border-bottom: 1px solid rgba(255,255,255,.04);
+    }
+    .inv-table tr:last-child td { border-bottom: none; }
+    .inv-table tr:hover td { background: rgba(255,255,255,.02); }
+    .inv-table td:first-child { font-weight: 600; color: var(--white); }
+    .py { color: var(--yellow); font-weight: 700; }
+    .pm { font-size: 11.5px; color: rgba(255,255,255,.35); }
+
+    .callout-box {
+      border: 1px solid rgba(245,194,0,.6);
+      padding: 30px 36px;
+      position: relative;
+    }
+    .callout-box::before {
+      content: 'VALOR TOTAL';
+      position: absolute; top: -10px; left: 22px;
+      background: var(--black);
+      padding: 0 12px;
+      font-size: 9.5px; font-weight: 800;
+      letter-spacing: .22em;
+      color: var(--yellow);
+    }
+    .callout-box p {
+      font-size: 15.5px; line-height: 1.75;
+      color: rgba(255,255,255,.75);
+    }
+    .callout-box strong { color: var(--yellow); }
+
+    /* ────────────────────────────
+       CTA
+    ──────────────────────────── */
+    .cta-wrap {
+      background: var(--yellow);
+      padding: 100px 64px;
+    }
+    .cta-wrap .sec-title { color: var(--black); }
+    .cta-wrap .sec-sub   { color: rgba(0,0,0,.55); }
+
+    .btn-wa {
+      display: inline-flex; align-items: center; gap: 13px;
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 13px; font-weight: 800;
+      letter-spacing: .12em; text-transform: uppercase;
+      text-decoration: none;
+      padding: 20px 44px;
+      margin-top: 44px;
+      transition: transform .25s var(--ease), box-shadow .25s var(--ease);
+    }
+    .btn-wa:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 36px rgba(0,0,0,.22);
+    }
+    .cta-note {
+      display: block;
+      margin-top: 22px;
+      font-size: 11.5px; color: rgba(0,0,0,.45);
+      font-weight: 500;
+    }
+
+    /* ────────────────────────────
+       FOOTER
+    ──────────────────────────── */
+    footer {
+      background: #0e0e0e;
+      padding: 44px 64px;
+      display: flex; align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap; gap: 16px;
+    }
+    footer img {
+      height: 22px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .45;
+    }
+    .ft-text  { font-size: 12px; color: rgba(255,255,255,.28); font-weight: 500; }
+    .ft-valid { font-size: 11px; color: rgba(255,255,255,.18); margin-top: 4px; }
+
+    /* ────────────────────────────
+       ANIMATIONS
+    ──────────────────────────── */
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ────────────────────────────
+       RESPONSIVE
+    ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .prob-grid { grid-template-columns: repeat(2, 1fr); }
+      .mod-card  { grid-template-columns: 1fr; }
+      .mod-card.flip { direction: ltr; }
+      .mod-visual { min-height: 200px; }
+      .mod-body   { border: none !important; padding: 40px 36px; }
+    }
+    @media (max-width: 768px) {
+      .hero, .problems, .modules-wrap, .pricing-wrap, .cta-wrap, footer {
+        padding-left: 28px; padding-right: 28px;
+      }
+      .nav { padding: 0 24px; }
+      .nav-tag { display: none; }
+      .hero-deco { display: none; }
+      .hero { padding-top: 90px; }
+      .mod-body { padding: 32px 24px; }
+    }
+    @media (max-width: 540px) {
+      .prob-grid { grid-template-columns: 1fr; }
+      .hero, .problems, .modules-wrap, .pricing-wrap, .cta-wrap, footer {
+        padding-left: 20px; padding-right: 20px;
+      }
+      .btn-wa { width: 100%; justify-content: center; }
+      .mod-price-row { flex-direction: column; width: 100%; }
+      .mod-price-item + .mod-price-item { border-left: none; border-top: 1px solid var(--gray-line); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo"><img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable"></div>
+    <div class="nav-tag">Propuesta para <strong>Constructora Muñoz</strong></div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-wrap">
+
+      <div class="hero-brands">
+        <img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable">
+        <span class="x">×</span>
+        <img src="https://i.imgur.com/FTPslh4.png" alt="Constructora Muñoz">
+      </div>
+
+      <span class="hero-eyebrow">Propuesta Digital 2026</span>
+
+      <h1>Más clientes.<br>Mejor organización.<br><em>Tu constructora<br>en el siguiente nivel.</em></h1>
+
+      <p class="hero-sub">Una solución modular diseñada para Constructora Muñoz — empieza con lo que necesitas hoy, crece cuando quieras.</p>
+
+      <a href="#modulos" class="btn-cta">
+        Ver los módulos
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </div>
+    <div class="hero-deco">5</div>
+  </section>
+
+  <!-- ══ PROBLEMAS ════════════════════════ -->
+  <section class="problems" id="problemas">
+    <div class="section-wrap">
+      <div class="problems-hd reveal">
+        <span class="eyebrow e-red">La situación actual</span>
+        <h2 class="sec-title">¿Qué está pasando hoy?</h2>
+        <p class="sec-sub">Cuatro desafíos que frenan el crecimiento de cualquier constructora sin presencia digital.</p>
+      </div>
+
+      <div class="prob-grid">
+
+        <div class="prob-card reveal d1">
+          <!-- icon: globe/web -->
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.8"/>
+            <ellipse cx="20" cy="20" rx="6.5" ry="13" stroke="currentColor" stroke-width="1.8"/>
+            <line x1="7" y1="20" x2="33" y2="20" stroke="currentColor" stroke-width="1.8"/>
+            <line x1="9" y1="13" x2="31" y2="13" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+            <line x1="9" y1="27" x2="31" y2="27" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+          </svg>
+          <h3>Tu empresa no aparece donde buscan los compradores</h3>
+          <p>Sin presencia digital profesional, los interesados no te encuentran — y van a tu competencia.</p>
+        </div>
+
+        <div class="prob-card reveal d2">
+          <!-- icon: funnel/leak -->
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <path d="M8 10H32L24 20V32L16 28V20L8 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M28 32L34 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M26 28L34 30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <h3>Cada día pierdes clientes que nunca vuelven a llamar</h3>
+          <p>Sin sistema de seguimiento, los leads se enfrían. Sin registro, se olvidan. Sin proceso, se pierden.</p>
+        </div>
+
+        <div class="prob-card reveal d3">
+          <!-- icon: people/team -->
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="16" cy="14" r="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="27" cy="13" r="4" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M6 32C6 26.477 10.477 22 16 22C21.523 22 26 26.477 26 32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M27 21C30.314 21 33 23.686 33 27" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <h3>Tus asesores trabajan sin herramientas ni control</h3>
+          <p>Cada uno lleva sus clientes a su manera — sin visibilidad para la empresa, sin datos compartidos.</p>
+        </div>
+
+        <div class="prob-card reveal d4">
+          <!-- icon: chat/wa -->
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <path d="M8 13C8 11.343 9.343 10 11 10H29C30.657 10 32 11.343 32 13V24C32 25.657 30.657 27 29 27H22L16 34V27H11C9.343 27 8 25.657 8 24V13Z" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="16" cy="18.5" r="1.5" fill="currentColor"/>
+            <circle cx="20" cy="18.5" r="1.5" fill="currentColor"/>
+            <circle cx="24" cy="18.5" r="1.5" fill="currentColor"/>
+          </svg>
+          <h3>El WhatsApp no para, pero tampoco da abasto</h3>
+          <p>Respuestas manuales, tardías e inconsistentes. A medianoche nadie responde — y el cliente se va.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MÓDULOS ═══════════════════════════ -->
+  <section class="modules-wrap" id="modulos">
+    <div class="section-wrap">
+      <div class="modules-hd reveal">
+        <span class="eyebrow e-dim">La solución</span>
+        <h2 class="sec-title">Lo que Remarkable hace por ti</h2>
+        <p class="sec-sub">Módulos independientes. Contrata uno o todos — cada uno resuelve un problema concreto.</p>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO 1 ── -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.72), rgba(20,20,20,0.72)), url('https://images.unsplash.com/photo-1547119957-637f8679db1e?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="8" y="18" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M8 26H68" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="14" cy="22" r="1.8" fill="currentColor"/>
+          <circle cx="19.5" cy="22" r="1.8" fill="currentColor"/>
+          <circle cx="25" cy="22" r="1.8" fill="currentColor"/>
+          <path d="M22 42H54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M28 48H48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+          <path d="M38 58V64M38 64H28M38 64H48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="big-num">01</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">01</span>
+          Módulo Base
+        </div>
+        <h3>Tu Página Web Profesional</h3>
+        <p class="mod-quote">"Tu empresa merece una presencia digital que inspire confianza desde el primer clic."</p>
+        <p class="mod-desc">Página web diseñada a medida, con tu dominio propio (constructoramuñoz.com), certificado de seguridad, formulario de contacto y adaptada para celulares.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Dominio propio (.com con tu nombre de empresa)</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Diseño profesional adaptado a móviles</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Formulario de captación de interesados</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Publicación y mantenimiento mensual incluidos</li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$100–150</strong></div>
+          <div class="mod-price-item">Desde <strong>$70<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO 2 ── -->
+    <div class="mod-card flip reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(100,10,16,0.72), rgba(100,10,16,0.72)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop') center/cover no-repeat; color: #fff;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="10" y="16" width="56" height="44" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M10 28H66" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+          <rect x="18" y="36" width="16" height="3" rx="1.5" fill="currentColor"/>
+          <rect x="18" y="43" width="11" height="2.5" rx="1.25" fill="currentColor" opacity=".45"/>
+          <rect x="42" y="36" width="16" height="3" rx="1.5" fill="currentColor"/>
+          <rect x="42" y="43" width="11" height="2.5" rx="1.25" fill="currentColor" opacity=".45"/>
+          <path d="M38 16V10M38 10L33 15M38 10L43 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="big-num">02</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#ED1C24;">02</span>
+          Sistema Central
+        </div>
+        <h3>Remarkable CRM — Gestión de Clientes</h3>
+        <p class="mod-quote">"Nunca más pierdas un lead. Cada persona que te contacte queda registrada y en seguimiento."</p>
+        <p class="mod-desc">Un sistema centralizado donde llegan todos los clientes potenciales. Tu equipo los contacta, los sigue y los cierra. Tú ves el estado de cada uno en tiempo real.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#ED1C24;"></span>Registro automático de cada interesado</li>
+          <li><span class="dot" style="background:#ED1C24;"></span>Pipeline de ventas visual (Nuevo → En seguimiento → Cerrado)</li>
+          <li><span class="dot" style="background:#ED1C24;"></span>Mensajes de confirmación automáticos al cliente</li>
+          <li><span class="dot" style="background:#ED1C24;"></span>Actualizaciones, cambios web y reportes incluidos</li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$100–150</strong></div>
+          <div class="mod-price-item"><strong>$300<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO 3 ── -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.72), rgba(20,20,20,0.72)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <circle cx="38" cy="26" r="10" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M18 60C18 49.059 27.059 40 38 40C48.941 40 58 49.059 58 60" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <rect x="52" y="44" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M55 51H67M55 55H63" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".65"/>
+        </svg>
+        <span class="big-num">03</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">03</span>
+          Add-on Modular
+          <span style="margin-left:8px;font-size:9px;letter-spacing:.1em;color:#ED1C24;font-weight:700;">· Requiere Módulo 02</span>
+        </div>
+        <h3>Espacio Personal por Asesor</h3>
+        <p class="mod-quote">"Dale a cada asesor sus propias herramientas. Tú mantienes la visibilidad total."</p>
+        <p class="mod-desc">Cada asesor de ventas accede a su propio espacio de trabajo digital — con su lista de clientes, historial y estados personalizables. La constructora ve todo desde una vista unificada.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Sistema de gestión individual por asesor</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Contactos ilimitados sin costo extra</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Estados de cliente personalizables</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Vista gerencial centralizada para la empresa</li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item"><strong>$30<small>/asesor/mes</small></strong></div>
+          <div class="mod-price-item wide" style="font-size:12px;font-weight:500;color:var(--gray-mid);">La empresa puede pagar por sus asesores — o cada asesor individualmente.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO 4 ── -->
+    <div class="mod-card flip reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(6,50,40,0.72), rgba(6,50,40,0.72)), url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&auto=format&fit=crop') center/cover no-repeat; color: #fff;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <path d="M14 20C14 16.686 16.686 14 20 14H56C59.314 14 62 16.686 62 20V46C62 49.314 59.314 52 56 52H42L32 64V52H20C16.686 52 14 49.314 14 46V20Z" stroke="currentColor" stroke-width="2.2"/>
+          <circle cx="28" cy="33" r="3" fill="currentColor"/>
+          <circle cx="38" cy="33" r="3" fill="currentColor"/>
+          <circle cx="48" cy="33" r="3" fill="currentColor"/>
+        </svg>
+        <span class="big-num">04</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#128C7E;">04</span>
+          Automatización
+        </div>
+        <h3>Bot WhatsApp 24/7</h3>
+        <p class="mod-quote">"Tu WhatsApp trabaja solo — responde, informa y agenda sin que nadie tenga que estar pendiente."</p>
+        <p class="mod-desc">Un asistente virtual que responde automáticamente las consultas más frecuentes: proyectos disponibles, precios, ubicaciones, disponibilidad. Deriva al asesor correcto cuando el cliente quiere hablar con alguien.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#128C7E;"></span>Respuestas automáticas las 24 horas</li>
+          <li><span class="dot" style="background:#128C7E;"></span>Información actualizada de tus proyectos</li>
+          <li><span class="dot" style="background:#128C7E;"></span>Derivación inteligente a asesores</li>
+          <li><span class="dot" style="background:#128C7E;"></span>También disponible por asesor (+$50 implementación · +$30/mes)</li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$100</strong></div>
+          <div class="mod-price-item"><strong>$50<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── MÓDULO 5 ── -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.72), rgba(20,20,20,0.72)), url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="22" y="18" width="32" height="26" rx="4" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M30 27C30 25.343 31.343 24 33 24H43C44.657 24 46 25.343 46 27V37C46 38.657 44.657 40 43 40H33C31.343 40 30 38.657 30 37V27Z" stroke="currentColor" stroke-width="1.5" opacity=".55"/>
+          <path d="M38 44V56M38 56H28M38 56H48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="34" cy="31" r="2" fill="currentColor"/>
+          <circle cx="38" cy="31" r="2" fill="currentColor"/>
+          <circle cx="42" cy="31" r="2" fill="currentColor"/>
+          <path d="M14 28H18M58 28H62M14 38H18M58 38H62" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".45"/>
+        </svg>
+        <span class="big-num">05</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">05</span>
+          A medida
+        </div>
+        <h3>Inteligencia Artificial para tu Empresa</h3>
+        <p class="mod-quote">"Hay partes de tu operación que podrían hacerse solas."</p>
+        <p class="mod-desc">Analizamos contigo qué tareas consumen más tiempo en tu equipo y diseñamos herramientas de inteligencia artificial a medida: generación de propuestas, análisis de clientes potenciales, seguimiento automatizado y más.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Diagnóstico de tu operación sin costo</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Soluciones diseñadas a medida para tu empresa</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Integradas con el sistema que ya tengas contratado</li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item"><strong>Se cotiza según alcance</strong></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ PRECIOS ═══════════════════════════ -->
+  <section class="pricing-wrap" id="precios">
+    <div class="section-wrap">
+      <div class="pricing-hd reveal">
+        <span class="eyebrow e-faint">Inversión</span>
+        <h2 class="sec-title light">Resumen de inversión</h2>
+      </div>
+
+      <table class="inv-table reveal">
+        <thead>
+          <tr>
+            <th>Módulo</th>
+            <th>Implementación</th>
+            <th>Mensual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Página Web (básica)</td>
+            <td class="py">$100–150</td>
+            <td><span class="py">$70</span><span class="pm">/mes</span></td>
+          </tr>
+          <tr>
+            <td>Página Web + Captura de datos</td>
+            <td class="py">$130–150</td>
+            <td><span class="py">$100</span><span class="pm">/mes</span></td>
+          </tr>
+          <tr>
+            <td>Sistema CRM Remarkable</td>
+            <td class="py">$100–150</td>
+            <td><span class="py">$300</span><span class="pm">/mes</span></td>
+          </tr>
+          <tr>
+            <td>Espacio por asesor <span class="pm">(add-on)</span></td>
+            <td class="pm">—</td>
+            <td><span class="py">$30</span><span class="pm">/asesor/mes</span></td>
+          </tr>
+          <tr>
+            <td>Bot WhatsApp empresa</td>
+            <td class="py">$100</td>
+            <td><span class="py">$50</span><span class="pm">/mes</span></td>
+          </tr>
+          <tr>
+            <td>Bot WhatsApp por asesor <span class="pm">(add-on)</span></td>
+            <td class="py">$50<span class="pm">/asesor</span></td>
+            <td><span class="py">$30</span><span class="pm">/asesor/mes</span></td>
+          </tr>
+          <tr>
+            <td>Inteligencia Artificial</td>
+            <td class="pm">A cotizar</td>
+            <td class="pm">A cotizar</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="callout-box reveal">
+        <p>Con los 4 módulos principales — Web + CRM + 10 Asesores + Bot empresa — tu inversión mensual total sería de <strong>$750/mes</strong>, con un setup inicial de aproximadamente <strong>$450–500</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ CTA ════════════════════════════════ -->
+  <section class="cta-wrap" id="contacto">
+    <div class="section-wrap">
+      <span class="eyebrow" style="color:rgba(0,0,0,.35);">El siguiente paso</span>
+      <h2 class="sec-title reveal">¿Listo para empezar?</h2>
+      <p class="sec-sub reveal">Conversemos sobre qué módulos tienen más sentido para tu equipo ahora mismo. Sin compromiso.</p>
+      <a href="https://wa.me/59169464933" target="_blank" rel="noopener" class="btn-wa reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Hablar con Remarkable →
+      </a>
+      <span class="cta-note">Remarkable · Cochabamba, Bolivia · weremark.com</span>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ════════════════════════════ -->
+  <footer>
+    <img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable">
+    <div>
+      <div class="ft-text">Propuesta preparada por Remarkable para Constructora Muñoz · 2026</div>
+      <div class="ft-valid">Esta propuesta tiene validez de 30 días.</div>
+    </div>
+  </footer>
+
+  <script>
+    /* sticky nav */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), { passive: true });
+
+    /* scroll-reveal */
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
