@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Propuesta Detallada 2026 — Constructora Muñoz × Remarkable</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --black:       #1a1a1a;
+      --yellow:      #F5C200;
+      --yellow-dim:  #B8900A;
+      --red:         #ED1C24;
+      --red-dark:    #8E1A23;
+      --white:       #ffffff;
+      --gray-bg:     #F4F4F4;
+      --gray-line:   #E0E0E0;
+      --gray-mid:    #727373;
+      --gray-dark:   #444444;
+      --green-wa:    #128C7E;
+      --blue-g:      #1a73e8;
+      --font:        'Montserrat', sans-serif;
+      --ease:        cubic-bezier(.4,0,.2,1);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── NAVBAR ─────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 60px;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--gray-line);
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding: 0 48px;
+      transition: box-shadow .3s var(--ease);
+    }
+    .nav.scrolled { box-shadow: 0 2px 24px rgba(0,0,0,.07); }
+    .nav-logo img { height: 28px; width: auto; display: block; }
+    .nav-tag { font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--gray-mid); }
+    .nav-tag strong { color: var(--black); font-weight: 700; }
+    .nav-badge {
+      display: inline-block;
+      background: var(--yellow);
+      color: var(--black);
+      font-size: 8.5px; font-weight: 800;
+      letter-spacing: .14em; text-transform: uppercase;
+      padding: 4px 10px;
+      margin-left: 12px;
+    }
+
+    /* ── HERO ────────────────────────────────── */
+    .hero {
+      background: var(--black);
+      min-height: 100vh;
+      display: flex; align-items: center;
+      padding: 100px 64px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(245,194,0,.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,194,0,.035) 1px, transparent 1px);
+      background-size: 56px 56px;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, var(--yellow) 0%, transparent 80%);
+    }
+    .hero-wrap { max-width: 1160px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    .hero-brands { display: flex; align-items: center; gap: 18px; margin-bottom: 52px; opacity: 0; animation: riseIn .8s var(--ease) forwards .2s; }
+    .hero-brands img { height: 26px; width: auto; }
+    .hero-brands .x { font-size: 17px; color: var(--yellow); font-weight: 300; }
+    .hero-eyebrow { display: block; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; color: var(--yellow); margin-bottom: 24px; opacity: 0; animation: riseIn .8s var(--ease) forwards .4s; }
+    .hero h1 { font-size: clamp(38px, 5.5vw, 72px); font-weight: 900; line-height: 1.08; letter-spacing: -.02em; color: var(--white); max-width: 860px; margin-bottom: 28px; opacity: 0; animation: riseIn .8s var(--ease) forwards .6s; }
+    .hero h1 em { font-style: normal; color: var(--yellow); }
+    .hero-sub { font-size: 17px; font-weight: 400; line-height: 1.7; color: rgba(255,255,255,.55); max-width: 580px; margin-bottom: 14px; opacity: 0; animation: riseIn .8s var(--ease) forwards .8s; }
+    .hero-note { font-size: 12px; font-weight: 600; letter-spacing: .06em; color: rgba(245,194,0,.5); margin-bottom: 44px; opacity: 0; animation: riseIn .8s var(--ease) forwards .9s; }
+    .btn-cta { display: inline-flex; align-items: center; gap: 10px; background: var(--yellow); color: var(--black); font-family: var(--font); font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; text-decoration: none; padding: 17px 36px; position: relative; overflow: hidden; transition: transform .25s var(--ease), box-shadow .25s var(--ease); opacity: 0; animation: riseIn .8s var(--ease) forwards 1s; }
+    .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(245,194,0,.35); }
+    .btn-cta svg { transition: transform .25s var(--ease); }
+    .btn-cta:hover svg { transform: translateX(5px); }
+    .hero-deco { position: absolute; right: 60px; bottom: 40px; font-size: 240px; font-weight: 900; color: rgba(245,194,0,.028); line-height: 1; letter-spacing: -.06em; user-select: none; pointer-events: none; }
+
+    /* ── SHARED ──────────────────────────────── */
+    .section-wrap { max-width: 1160px; margin: 0 auto; }
+    .eyebrow { display: block; font-size: 10px; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 14px; }
+    .eyebrow.e-red   { color: var(--red); }
+    .eyebrow.e-dim   { color: var(--gray-mid); }
+    .eyebrow.e-yellow{ color: var(--yellow-dim); }
+    .eyebrow.e-faint { color: rgba(255,255,255,.3); }
+    .sec-title { font-size: clamp(28px, 3.8vw, 46px); font-weight: 800; line-height: 1.12; letter-spacing: -.02em; }
+    .sec-title.light { color: var(--white); }
+    .sec-sub { font-size: 16px; line-height: 1.7; color: var(--gray-mid); max-width: 520px; margin-top: 14px; }
+    .sec-sub.light { color: rgba(255,255,255,.55); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+    .reveal.on { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+    /* ── PROBLEMS ────────────────────────────── */
+    .problems { background: var(--gray-bg); padding: 100px 64px; }
+    .problems-hd { margin-bottom: 64px; }
+    .prob-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .prob-card { background: var(--white); padding: 36px 30px; position: relative; transition: transform .3s var(--ease), box-shadow .3s var(--ease); }
+    .prob-card::after { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--gray-line); transition: background .3s var(--ease); }
+    .prob-card:hover { transform: translateY(-5px); box-shadow: 0 18px 40px rgba(0,0,0,.07); }
+    .prob-card:hover::after { background: var(--red); }
+    .prob-icon { width: 40px; height: 40px; margin-bottom: 22px; color: var(--gray-dark); }
+    .prob-card h3 { font-size: 15px; font-weight: 700; line-height: 1.35; margin-bottom: 10px; }
+    .prob-card p { font-size: 13px; line-height: 1.65; color: var(--gray-mid); }
+
+    /* ── MODULES ─────────────────────────────── */
+    .modules-wrap { padding: 100px 64px; background: var(--white); }
+    .modules-hd   { margin-bottom: 72px; }
+    .mod-card { display: grid; grid-template-columns: 380px 1fr; max-width: 1160px; margin: 0 auto 36px; overflow: hidden; box-shadow: 0 2px 24px rgba(0,0,0,.06); transition: box-shadow .3s var(--ease); }
+    .mod-card:hover { box-shadow: 0 8px 40px rgba(0,0,0,.11); }
+    .mod-card.flip { direction: rtl; }
+    .mod-card.flip > * { direction: ltr; }
+    .mod-visual { position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 52px; min-height: 360px; }
+    .mod-visual .big-num { position: absolute; bottom: -16px; right: 12px; font-size: 160px; font-weight: 900; line-height: 1; letter-spacing: -.06em; opacity: .09; color: inherit; user-select: none; }
+    .mod-icon { width: 76px; height: 76px; position: relative; z-index: 1; }
+    .mod-body { background: var(--white); padding: 48px 52px; display: flex; flex-direction: column; justify-content: flex-start; border-left: 1px solid var(--gray-line); }
+    .mod-card.flip .mod-body { border-left: none; border-right: 1px solid var(--gray-line); }
+    .mod-tag { display: inline-flex; align-items: center; gap: 9px; font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 18px; }
+    .mod-num-badge { width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: var(--white); }
+    .mod-body h3 { font-size: clamp(20px, 2.2vw, 27px); font-weight: 800; line-height: 1.2; letter-spacing: -.01em; margin-bottom: 14px; }
+    .mod-quote { font-size: 13.5px; font-style: italic; color: var(--gray-mid); line-height: 1.65; margin-bottom: 18px; }
+    .mod-desc { font-size: 14.5px; line-height: 1.72; color: var(--gray-dark); margin-bottom: 24px; }
+
+    .mod-list { list-style: none; margin-bottom: 28px; }
+    .mod-list li { font-size: 13px; color: var(--gray-dark); padding: 7px 0; display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid var(--gray-line); }
+    .mod-list li:last-child { border-bottom: none; }
+    .dot { width: 7px; height: 7px; flex-shrink: 0; display: inline-block; margin-top: 5px; }
+
+    .mod-price-row { display: inline-flex; align-items: center; gap: 0; background: var(--gray-bg); align-self: flex-start; overflow: hidden; }
+    .mod-price-item { padding: 13px 22px; font-size: 13px; font-weight: 600; color: var(--black); }
+    .mod-price-item + .mod-price-item { border-left: 1px solid var(--gray-line); }
+    .mod-price-item small { font-weight: 400; color: var(--gray-mid); font-size: 11.5px; }
+    .mod-price-item.wide { max-width: 280px; line-height: 1.5; }
+
+    /* ── Module sub-sections ─────────────────── */
+    .mod-divider { border: none; border-top: 1px solid var(--gray-line); margin: 24px 0; }
+    .mod-subsec-label {
+      font-size: 9px; font-weight: 800; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--gray-mid); margin-bottom: 10px; display: block;
+    }
+    .mod-subsec-title { font-size: 14px; font-weight: 700; margin-bottom: 12px; color: var(--black); }
+
+    /* Feature grid */
+    .feat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 24px; }
+    .feat-item { display: flex; align-items: flex-start; gap: 9px; padding: 11px 13px; background: var(--gray-bg); }
+    .feat-icon { font-size: 15px; flex-shrink: 0; line-height: 1.4; }
+    .feat-text { font-size: 12px; line-height: 1.55; color: var(--gray-dark); font-weight: 500; }
+    .feat-text strong { display: block; font-size: 11.5px; font-weight: 700; color: var(--black); margin-bottom: 1px; }
+
+    /* Pipeline / Journey */
+    .pipeline { display: flex; align-items: center; gap: 0; margin-bottom: 24px; flex-wrap: wrap; }
+    .pipe-step { padding: 9px 14px; font-size: 11px; font-weight: 700; text-align: center; line-height: 1.3; flex: 1; min-width: 90px; }
+    .pipe-arrow { font-size: 14px; color: var(--gray-mid); flex-shrink: 0; }
+
+    /* Automations list */
+    .auto-list { list-style: none; margin-bottom: 24px; }
+    .auto-list li { font-size: 12.5px; color: var(--gray-dark); padding: 8px 0 8px 22px; position: relative; border-bottom: 1px solid var(--gray-line); line-height: 1.5; }
+    .auto-list li:last-child { border-bottom: none; }
+    .auto-list li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+    /* Domain table */
+    .domain-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; font-size: 12.5px; }
+    .domain-table th { background: var(--black); color: var(--white); padding: 9px 14px; text-align: left; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; font-weight: 700; }
+    .domain-table td { padding: 9px 14px; border-bottom: 1px solid var(--gray-line); color: var(--gray-dark); }
+    .domain-table tr:last-child td { border-bottom: none; }
+    .domain-table .rec { font-weight: 800; color: var(--black); }
+    .domain-table .rec-badge { display: inline-block; background: var(--yellow); color: var(--black); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 2px 7px; margin-left: 6px; vertical-align: middle; }
+    .domain-note { font-size: 11px; color: var(--gray-mid); line-height: 1.55; padding: 10px 14px; background: var(--gray-bg); margin-bottom: 24px; border-left: 3px solid var(--yellow); }
+
+    /* Pricing chips (monthly vs annual) */
+    .pricing-options { display: flex; gap: 12px; margin-bottom: 24px; flex-wrap: wrap; }
+    .pricing-chip { flex: 1; min-width: 160px; padding: 18px 20px; background: var(--gray-bg); position: relative; }
+    .pricing-chip.highlight { background: var(--black); }
+    .pricing-chip-label { font-size: 9px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--gray-mid); margin-bottom: 8px; display: block; }
+    .pricing-chip.highlight .pricing-chip-label { color: rgba(255,255,255,.45); }
+    .pricing-chip-amount { font-size: 28px; font-weight: 900; letter-spacing: -.02em; color: var(--black); line-height: 1; }
+    .pricing-chip.highlight .pricing-chip-amount { color: var(--yellow); }
+    .pricing-chip-unit { font-size: 12px; font-weight: 500; color: var(--gray-mid); }
+    .pricing-chip.highlight .pricing-chip-unit { color: rgba(255,255,255,.5); }
+    .pricing-chip-note { font-size: 10.5px; color: var(--gray-mid); margin-top: 6px; line-height: 1.45; }
+    .pricing-chip.highlight .pricing-chip-note { color: rgba(255,255,255,.55); }
+    .annual-badge { display: inline-block; background: var(--yellow); color: var(--black); font-size: 8px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; padding: 3px 8px; position: absolute; top: 12px; right: 12px; }
+
+    /* Extensibility note */
+    .extensibility-note { padding: 16px 18px; border: 1px solid var(--gray-line); background: var(--white); margin-bottom: 8px; }
+    .extensibility-note p { font-size: 12.5px; line-height: 1.6; color: var(--gray-dark); }
+    .extensibility-note strong { color: var(--black); }
+
+    /* ── BONUS: Google Workspace ─────────────── */
+    .bonus-wrap { background: #0e0e0e; padding: 80px 64px; }
+    .bonus-inner { max-width: 1160px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: start; }
+    .bonus-left {}
+    .bonus-gift-tag {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(245,194,0,.12); border: 1px solid rgba(245,194,0,.25);
+      padding: 8px 16px; margin-bottom: 28px;
+      font-size: 10px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; color: var(--yellow);
+    }
+    .bonus-left h2 { font-size: clamp(22px, 2.8vw, 36px); font-weight: 800; line-height: 1.2; color: var(--white); margin-bottom: 16px; }
+    .bonus-left h2 em { font-style: normal; color: var(--yellow); }
+    .bonus-left p { font-size: 14px; line-height: 1.75; color: rgba(255,255,255,.5); margin-bottom: 20px; }
+    .bonus-email-example {
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 24px;
+    }
+    .email-pill {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(255,255,255,.07); padding: 10px 16px;
+      font-size: 13px; font-weight: 600; color: rgba(255,255,255,.8);
+      width: fit-content;
+    }
+    .email-pill span { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); }
+    .bonus-right {}
+    .gws-plans { display: flex; flex-direction: column; gap: 12px; }
+    .gws-plan {
+      padding: 20px 22px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      position: relative;
+    }
+    .gws-plan.rec { border-color: rgba(245,194,0,.4); background: rgba(245,194,0,.05); }
+    .gws-plan-name { font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 6px; }
+    .gws-plan.rec .gws-plan-name { color: var(--yellow); }
+    .gws-plan-price { font-size: 22px; font-weight: 900; color: var(--white); letter-spacing: -.02em; line-height: 1; margin-bottom: 8px; }
+    .gws-plan-price small { font-size: 13px; font-weight: 500; color: rgba(255,255,255,.4); }
+    .gws-plan-features { list-style: none; }
+    .gws-plan-features li { font-size: 12px; color: rgba(255,255,255,.5); padding: 4px 0; }
+    .gws-plan-features li::before { content: '·  '; color: rgba(245,194,0,.5); font-weight: 700; }
+    .gws-badge { position: absolute; top: 16px; right: 16px; background: var(--yellow); color: var(--black); font-size: 8px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; padding: 3px 9px; }
+    .gws-passthrough { margin-top: 16px; font-size: 11.5px; color: rgba(255,255,255,.35); line-height: 1.55; padding: 12px 16px; border-left: 2px solid rgba(245,194,0,.3); }
+
+    /* ── PRICING SUMMARY ─────────────────────── */
+    .summary-wrap { background: var(--gray-bg); padding: 100px 64px; }
+    .summary-inner { max-width: 1160px; margin: 0 auto; }
+    .summary-hd { margin-bottom: 52px; }
+    .summary-table { width: 100%; border-collapse: collapse; }
+    .summary-table thead th { background: var(--black); color: var(--white); padding: 14px 20px; text-align: left; font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+    .summary-table tbody tr { background: var(--white); border-bottom: 2px solid var(--gray-bg); }
+    .summary-table tbody tr:hover { background: #fafafa; }
+    .summary-table td { padding: 16px 20px; font-size: 13px; color: var(--gray-dark); vertical-align: middle; }
+    .summary-table td:first-child { font-weight: 700; color: var(--black); }
+    .summary-table td .requires { font-size: 10px; font-weight: 600; color: var(--red); display: block; margin-top: 2px; letter-spacing: .06em; }
+    .summary-table .price-num { font-weight: 800; color: var(--black); font-size: 14px; }
+    .summary-table .price-unit { font-size: 11px; font-weight: 500; color: var(--gray-mid); }
+    .summary-table .total-row td { background: var(--black); color: var(--white); font-weight: 700; }
+    .summary-table .total-row td .price-num { color: var(--yellow); font-size: 16px; }
+    .summary-table .total-row td .price-unit { color: rgba(255,255,255,.45); }
+    .summary-note { margin-top: 18px; font-size: 12px; color: var(--gray-mid); line-height: 1.65; }
+
+    /* ── CTA ─────────────────────────────────── */
+    .cta-wrap { background: var(--yellow); padding: 100px 64px; }
+    .cta-wrap .sec-title { color: var(--black); }
+    .cta-wrap .sec-sub   { color: rgba(0,0,0,.55); }
+    .btn-wa { display: inline-flex; align-items: center; gap: 13px; background: var(--black); color: var(--white); font-family: var(--font); font-size: 13px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; text-decoration: none; padding: 20px 44px; margin-top: 44px; transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+    .btn-wa:hover { transform: translateY(-3px); box-shadow: 0 16px 36px rgba(0,0,0,.22); }
+    .cta-note { display: block; margin-top: 22px; font-size: 11.5px; color: rgba(0,0,0,.45); font-weight: 500; }
+
+    /* ── FOOTER ──────────────────────────────── */
+    footer { background: #0e0e0e; padding: 44px 64px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer img { height: 22px; width: auto; filter: brightness(0) invert(1); opacity: .45; }
+    .ft-text  { font-size: 12px; color: rgba(255,255,255,.28); font-weight: 500; }
+    .ft-valid { font-size: 11px; color: rgba(255,255,255,.18); margin-top: 4px; }
+
+    /* ── ANIMATIONS ──────────────────────────── */
+    @keyframes riseIn { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── RESPONSIVE ──────────────────────────── */
+    @media (max-width: 1024px) {
+      .prob-grid { grid-template-columns: repeat(2, 1fr); }
+      .mod-card  { grid-template-columns: 1fr; }
+      .mod-card.flip { direction: ltr; }
+      .mod-visual { min-height: 200px; }
+      .mod-body   { border: none !important; padding: 40px 36px; }
+      .bonus-inner { grid-template-columns: 1fr; gap: 48px; }
+    }
+    @media (max-width: 768px) {
+      .hero, .problems, .modules-wrap, .cta-wrap, .bonus-wrap, .summary-wrap, footer { padding-left: 28px; padding-right: 28px; }
+      .nav { padding: 0 24px; }
+      .nav-tag { display: none; }
+      .hero-deco { display: none; }
+      .hero { padding-top: 90px; }
+      .mod-body { padding: 32px 24px; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .pipeline { gap: 4px; }
+      .pipe-step { padding: 7px 8px; font-size: 10px; }
+    }
+    @media (max-width: 540px) {
+      .prob-grid { grid-template-columns: 1fr; }
+      .hero, .problems, .modules-wrap, .cta-wrap, .bonus-wrap, .summary-wrap, footer { padding-left: 20px; padding-right: 20px; }
+      .btn-wa { width: 100%; justify-content: center; }
+      .pricing-options { flex-direction: column; }
+      .summary-table { font-size: 11px; }
+      .summary-table td, .summary-table thead th { padding: 11px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav">
+    <div class="nav-logo"><img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable"></div>
+    <div class="nav-tag">
+      Propuesta para <strong>Constructora Muñoz</strong>
+      <span class="nav-badge">Detallada · Post-reunión</span>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════ -->
+  <section class="hero" id="inicio">
+    <div class="hero-wrap">
+
+      <div class="hero-brands">
+        <img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable">
+        <span class="x">×</span>
+        <img src="https://i.imgur.com/FTPslh4.png" alt="Constructora Muñoz">
+      </div>
+
+      <span class="hero-eyebrow">Propuesta Detallada 2026 · Post-Reunión</span>
+
+      <h1>Una plataforma completa.<br>Clientes organizados.<br><em>Tu constructora,<br>digitalizada.</em></h1>
+
+      <p class="hero-sub">Gracias por la reunión. Aquí está el detalle completo de cada servicio — exactamente lo que discutimos, con precios claros y todo lo que incluye cada módulo.</p>
+      <p class="hero-note">Sistema de gestión · WhatsApp automatizado · IA para contratos · Google Workspace incluido</p>
+
+      <a href="#modulos" class="btn-cta">
+        Ver el plan completo
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+
+    </div>
+    <div class="hero-deco">5</div>
+  </section>
+
+  <!-- ══ PROBLEMAS ═══════════════════════════════ -->
+  <section class="problems" id="problemas">
+    <div class="section-wrap">
+      <div class="problems-hd reveal">
+        <span class="eyebrow e-red">La situación actual</span>
+        <h2 class="sec-title">Lo que esta plataforma resuelve</h2>
+        <p class="sec-sub">Cuatro problemas concretos que el sistema digitaliza de raíz.</p>
+      </div>
+      <div class="prob-grid">
+
+        <div class="prob-card reveal d1">
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.8"/>
+            <ellipse cx="20" cy="20" rx="6.5" ry="13" stroke="currentColor" stroke-width="1.8"/>
+            <line x1="7" y1="20" x2="33" y2="20" stroke="currentColor" stroke-width="1.8"/>
+            <line x1="9" y1="13" x2="31" y2="13" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+            <line x1="9" y1="27" x2="31" y2="27" stroke="currentColor" stroke-width="1.5" opacity=".5"/>
+          </svg>
+          <h3>Sin presencia digital profesional</h3>
+          <p>Los interesados no te encuentran en línea y van a la competencia que sí aparece.</p>
+        </div>
+
+        <div class="prob-card reveal d2">
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <path d="M8 10H32L24 20V32L16 28V20L8 10Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+            <path d="M28 32L34 34" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M26 28L34 30" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          <h3>Leads sin seguimiento que se pierden</h3>
+          <p>Sin registro centralizado, los clientes potenciales se enfrían y no hay forma de recuperarlos.</p>
+        </div>
+
+        <div class="prob-card reveal d3">
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <circle cx="16" cy="14" r="5" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="27" cy="13" r="4" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M6 32C6 26.477 10.477 22 16 22C21.523 22 26 26.477 26 32" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+            <path d="M27 21C30.314 21 33 23.686 33 27" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+          </svg>
+          <h3>Asesores sin herramientas ni visibilidad</h3>
+          <p>Cada uno trabaja a su manera, sin datos compartidos y sin control centralizado para la empresa.</p>
+        </div>
+
+        <div class="prob-card reveal d4">
+          <svg class="prob-icon" viewBox="0 0 40 40" fill="none">
+            <path d="M8 13C8 11.343 9.343 10 11 10H29C30.657 10 32 11.343 32 13V24C32 25.657 30.657 27 29 27H22L16 34V27H11C9.343 27 8 25.657 8 24V13Z" stroke="currentColor" stroke-width="1.8"/>
+            <circle cx="16" cy="18.5" r="1.5" fill="currentColor"/>
+            <circle cx="20" cy="18.5" r="1.5" fill="currentColor"/>
+            <circle cx="24" cy="18.5" r="1.5" fill="currentColor"/>
+          </svg>
+          <h3>WhatsApp manual que no puede con todo</h3>
+          <p>Respuestas lentas, inconsistentes. De noche nadie responde y el cliente ya eligió a otro.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ MÓDULOS ════════════════════════════════ -->
+  <section class="modules-wrap" id="modulos">
+    <div class="section-wrap">
+      <div class="modules-hd reveal">
+        <span class="eyebrow e-dim">La solución completa</span>
+        <h2 class="sec-title">Cada módulo, en detalle</h2>
+        <p class="sec-sub">Contrata uno o todos — cada módulo resuelve algo concreto y funciona solo o en conjunto.</p>
+      </div>
+    </div>
+
+    <!-- ══ MÓDULO 1 ── Web Standalone ══ -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.72), rgba(20,20,20,0.72)), url('https://images.unsplash.com/photo-1547119957-637f8679db1e?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="8" y="18" width="60" height="40" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M8 26H68" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="14" cy="22" r="1.8" fill="currentColor"/>
+          <circle cx="19.5" cy="22" r="1.8" fill="currentColor"/>
+          <circle cx="25" cy="22" r="1.8" fill="currentColor"/>
+          <path d="M22 42H54" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M28 48H48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity=".5"/>
+          <path d="M38 58V64M38 64H28M38 64H48" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="big-num">01</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">01</span>
+          Módulo Base — Solo Página Web
+        </div>
+        <h3>Tu Página Web Profesional</h3>
+        <p class="mod-quote">"Tu empresa visible en línea, con tu dominio propio."</p>
+        <p class="mod-desc">Página web diseñada a medida para Constructora Muñoz, alojada en un servidor propio e independiente. Incluye dominio, certificado de seguridad, formulario de contacto y diseño adaptado para celulares. Los formularios envían los datos directamente por correo.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Dominio propio (ej. constructoramuñoz.com) — administrado por Remarkable</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Diseño profesional, adaptado a celulares</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Formulario de contacto — datos llegan a tu correo</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Servidor propio e independiente · Publicación y mantenimiento incluidos</li>
+          <li><span class="dot" style="background:#F5C200;" style="opacity:.5;"></span><span style="color:var(--gray-mid);font-style:italic;">Nota: sin el CRM, los datos del formulario solo llegan por correo — no se registran automáticamente</span></li>
+        </ul>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$130</strong></div>
+          <div class="mod-price-item">Desde <strong>$70<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MÓDULO 2 ── CRM (EXPANDIDO) ══ -->
+    <div class="mod-card flip reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(100,10,16,0.78), rgba(100,10,16,0.78)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&auto=format&fit=crop') center/cover no-repeat; color: #fff; align-items: flex-start; padding-top: 60px; min-height: 600px;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="10" y="16" width="56" height="44" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M10 28H66" stroke="currentColor" stroke-width="1.4" opacity=".4"/>
+          <rect x="18" y="36" width="16" height="3" rx="1.5" fill="currentColor"/>
+          <rect x="18" y="43" width="11" height="2.5" rx="1.25" fill="currentColor" opacity=".45"/>
+          <rect x="42" y="36" width="16" height="3" rx="1.5" fill="currentColor"/>
+          <rect x="42" y="43" width="11" height="2.5" rx="1.25" fill="currentColor" opacity=".45"/>
+          <path d="M38 16V10M38 10L33 15M38 10L43 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="big-num">02</span>
+      </div>
+
+      <div class="mod-body" style="padding: 48px 52px;">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#ED1C24;">02</span>
+          Sistema Central — Incluye Página Web
+        </div>
+        <h3>Remarkable CRM — Tu Ecosistema Digital</h3>
+        <p class="mod-quote">"Todos tus clientes, tu equipo, tu web y tus comunicaciones en un solo lugar."</p>
+        <p class="mod-desc">Al contratar el CRM, la página web de la constructora ya no vive en un servidor separado — <strong>vive dentro del mismo sistema</strong>. Esto hace que cada persona que llene el formulario entre directamente al CRM, sin intermediarios, sin pérdida de datos.</p>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: La Web dentro del CRM -->
+        <span class="mod-subsec-label">01 — La página web dentro del sistema</span>
+        <div class="feat-grid" style="margin-bottom:18px;">
+          <div class="feat-item">
+            <span class="feat-icon">🌐</span>
+            <span class="feat-text"><strong>Web integrada al CRM</strong>El sitio web de la constructora está conectado directamente al sistema — formulario → CRM en tiempo real.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">🔗</span>
+            <span class="feat-text"><strong>Sin intermediarios</strong>No hay correos de por medio. Cada lead que llena el formulario aparece al instante en el panel.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">📝</span>
+            <span class="feat-text"><strong>Blog de proyectos</strong>Publica actualizaciones de obra, avances y noticias directamente desde el sistema — sin necesidad de programadores.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">📱</span>
+            <span class="feat-text"><strong>Programación de redes sociales</strong>Planifica y publica en Instagram, Facebook y más desde el mismo panel del CRM.</span>
+          </div>
+        </div>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: Client Journey -->
+        <span class="mod-subsec-label">02 — Journey del cliente (estado en tiempo real)</span>
+        <p style="font-size:12.5px;color:var(--gray-dark);line-height:1.6;margin-bottom:14px;">Cada persona que muestre interés aparece en una vista visual tipo tablero. Puedes ver exactamente en qué etapa está cada uno y quién lo está atendiendo.</p>
+        <div class="pipeline" style="margin-bottom:18px;">
+          <div class="pipe-step" style="background:#1a1a1a;color:#F5C200;">Nuevo<br><span style="font-size:9px;font-weight:500;opacity:.7;">Llega al sistema</span></div>
+          <span class="pipe-arrow">›</span>
+          <div class="pipe-step" style="background:#2c2c2c;color:#fff;">Contactado<br><span style="font-size:9px;font-weight:500;opacity:.6;">Asesor activo</span></div>
+          <span class="pipe-arrow">›</span>
+          <div class="pipe-step" style="background:#2c2c2c;color:#fff;">Negociación<br><span style="font-size:9px;font-weight:500;opacity:.6;">Propuesta enviada</span></div>
+          <span class="pipe-arrow">›</span>
+          <div class="pipe-step" style="background:#ED1C24;color:#fff;">Cierre<br><span style="font-size:9px;font-weight:500;opacity:.8;">Contrato firmado</span></div>
+        </div>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: Automatizaciones -->
+        <span class="mod-subsec-label">03 — Automatizaciones incluidas</span>
+        <ul class="auto-list">
+          <li>Cuando alguien llena el formulario web, se crea automáticamente como nuevo contacto en el sistema con todos sus datos.</li>
+          <li>El asesor asignado recibe una notificación por correo avisando que llegó un nuevo interesado.</li>
+          <li>El administrador de la empresa recibe también una notificación independiente por cada nuevo lead.</li>
+          <li>Los asesores se asignan equitativamente de forma automática — el sistema distribuye los nuevos clientes en orden rotativo para que la carga sea pareja.</li>
+          <li>Si un cliente vuelve a llenar el formulario en el futuro, el sistema lo reconoce y lo asigna automáticamente al mismo asesor de antes — manteniendo la relación.</li>
+          <li>Cada asesor solo ve sus propios contactos — no puede ver los clientes de otros asesores.</li>
+          <li>La empresa ve todos los contactos de todos los asesores desde una vista gerencial centralizada.</li>
+        </ul>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: Más funciones -->
+        <span class="mod-subsec-label">04 — Más funciones del sistema</span>
+        <div class="feat-grid" style="margin-bottom:18px;">
+          <div class="feat-item">
+            <span class="feat-icon">∞</span>
+            <span class="feat-text"><strong>Contactos ilimitados</strong>Todos los clientes actuales, futuros y de marketing quedan guardados sin límite.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">📊</span>
+            <span class="feat-text"><strong>Vista gerencial</strong>El dueño ve el rendimiento de cada asesor, contactos por estado y actividad en tiempo real.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">💬</span>
+            <span class="feat-text"><strong>Plantillas de mensajes</strong>Mensajes predefinidos para responder rápido y con consistencia desde cualquier canal.</span>
+          </div>
+          <div class="feat-item">
+            <span class="feat-icon">🔧</span>
+            <span class="feat-text"><strong>Sistema extensible</strong>Se pueden agregar más automatizaciones, flujos y herramientas internas sin costo adicional de plataforma.</span>
+          </div>
+        </div>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: Dominio -->
+        <span class="mod-subsec-label">05 — Administración de dominio incluida</span>
+        <p style="font-size:12.5px;color:var(--gray-dark);line-height:1.6;margin-bottom:14px;">Al contratar este servicio, Remarkable se encarga de buscar, registrar y administrar el dominio por ti. El dominio recomendado es <strong>constructoramuñoz.com</strong> — único con ñ en .com, verificado disponible.</p>
+        <table class="domain-table">
+          <thead>
+            <tr>
+              <th>Duración</th>
+              <th>Costo del dominio</th>
+              <th>Equivalente/mes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1 año</td>
+              <td>$15</td>
+              <td style="color:var(--gray-mid);">$1.25/mes</td>
+            </tr>
+            <tr>
+              <td>2 años</td>
+              <td>$35</td>
+              <td style="color:var(--gray-mid);">$1.46/mes</td>
+            </tr>
+            <tr>
+              <td class="rec">3 años <span class="rec-badge">Recomendado</span></td>
+              <td class="rec">$50</td>
+              <td class="rec">$1.39/mes</td>
+            </tr>
+            <tr>
+              <td>5 años</td>
+              <td>$100</td>
+              <td style="color:var(--gray-mid);">$1.67/mes</td>
+            </tr>
+            <tr>
+              <td>10 años</td>
+              <td>$210</td>
+              <td style="color:var(--gray-mid);">$1.75/mes</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="domain-note">⚠️ El precio de renovación de dominios suele aumentar cada año. Registrarlo por más tiempo fija el costo actual y protege tu nombre de marca a largo plazo. El costo del dominio se paga una sola vez adicional al plan mensual.</p>
+
+        <hr class="mod-divider">
+
+        <!-- Sub-sección: Precios -->
+        <span class="mod-subsec-label">06 — Planes y precios del CRM</span>
+        <div class="pricing-options">
+          <div class="pricing-chip">
+            <span class="pricing-chip-label">Plan mensual</span>
+            <div class="pricing-chip-amount">$300</div>
+            <div class="pricing-chip-unit">/mes</div>
+            <div class="pricing-chip-note">Implementación única: <strong>$130</strong><br>Incluye web + CRM + automatizaciones + dominio</div>
+          </div>
+          <div class="pricing-chip highlight">
+            <span class="annual-badge">1 mes gratis</span>
+            <span class="pricing-chip-label">Plan anual</span>
+            <div class="pricing-chip-amount">$3,300</div>
+            <div class="pricing-chip-unit">/año · equivale a 11 meses</div>
+            <div class="pricing-chip-note">Pagas 11 meses, el 12° es de regalo.<br>Ahorro de $300 al año.</div>
+          </div>
+        </div>
+
+        <div class="extensibility-note">
+          <p>💡 <strong>El CRM es una plataforma viva.</strong> Dentro del sistema se pueden crear más automatizaciones, flujos de seguimiento, plantillas de mensajes personalizadas, sistemas internos de asignación, actualización de información y reportes — todo sin cambiar de herramienta ni pagar más.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══ MÓDULO 3 ── Asesores ══ -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.72), rgba(20,20,20,0.72)), url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <circle cx="38" cy="26" r="10" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M18 60C18 49.059 27.059 40 38 40C48.941 40 58 49.059 58 60" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/>
+          <rect x="52" y="44" width="18" height="14" rx="2.5" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M55 51H67M55 55H63" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".65"/>
+        </svg>
+        <span class="big-num">03</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">03</span>
+          Add-on Modular
+          <span style="margin-left:8px;font-size:9px;letter-spacing:.1em;color:#ED1C24;font-weight:700;">· Requiere Módulo 02</span>
+        </div>
+        <h3>Espacio Personal por Asesor</h3>
+        <p class="mod-quote">"Cada asesor tiene sus herramientas. La empresa tiene el control total."</p>
+        <p class="mod-desc">Cada asesor de ventas accede a su propio espacio dentro del sistema — ve solo sus clientes, los gestiona a su manera y se mantiene sincronizado con la empresa. La constructora tiene una vista unificada con todos los contactos y el estado de cada asesor.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Espacio individual por asesor — contactos privados, solo el asesor los ve</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Sincronización automática con la base de datos de la empresa</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Contactos ilimitados sin costo extra</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Estados de cliente personalizables por cada asesor</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Vista gerencial centralizada para el administrador</li>
+        </ul>
+        <div style="background:var(--gray-bg); padding:14px 18px; margin-bottom:20px; border-left: 3px solid var(--yellow);">
+          <p style="font-size:12px;color:var(--gray-dark);line-height:1.6;">💬 <strong>Decisión flexible:</strong> La empresa puede pagar por todos los asesores ($30 × 10 = $300 fijos al mes), o cada asesor puede decidir individualmente si desea su espacio. Se activan o desactivan asesores en cualquier momento.</p>
+        </div>
+        <div class="mod-price-row">
+          <div class="mod-price-item"><strong>$30<small>/asesor/mes</small></strong></div>
+          <div class="mod-price-item">10 asesores: <strong>$300<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MÓDULO 4 ── WhatsApp Bot ══ -->
+    <div class="mod-card flip reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(6,50,40,0.78), rgba(6,50,40,0.78)), url('https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&auto=format&fit=crop') center/cover no-repeat; color: #fff;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <path d="M14 20C14 16.686 16.686 14 20 14H56C59.314 14 62 16.686 62 20V46C62 49.314 59.314 52 56 52H42L32 64V52H20C16.686 52 14 49.314 14 46V20Z" stroke="currentColor" stroke-width="2.2"/>
+          <circle cx="28" cy="33" r="3" fill="currentColor"/>
+          <circle cx="38" cy="33" r="3" fill="currentColor"/>
+          <circle cx="48" cy="33" r="3" fill="currentColor"/>
+        </svg>
+        <span class="big-num">04</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#128C7E;">04</span>
+          Automatización
+        </div>
+        <h3>Bot WhatsApp 24/7</h3>
+        <p class="mod-quote">"Tu WhatsApp responde solo, en base a la información exacta que tú decidas compartir."</p>
+        <p class="mod-desc">Un asistente virtual que responde automáticamente a las consultas de clientes en WhatsApp. El bot se configura con la información que tú nos proporcionas: proyectos actuales, precios, ubicaciones, disponibilidad, etapas de obra — lo que la constructora quiera informar. Cuando el cliente necesita hablar con alguien, el bot deriva al asesor correcto.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#128C7E;"></span>Respuestas automáticas las 24 horas, los 7 días</li>
+          <li><span class="dot" style="background:#128C7E;"></span>Información configurada según lo que la empresa desea comunicar</li>
+          <li><span class="dot" style="background:#128C7E;"></span>Proyectos, precios, disponibilidad, avances de obra — todo personalizado</li>
+          <li><span class="dot" style="background:#128C7E;"></span>Derivación inteligente al asesor asignado cuando el cliente lo solicita</li>
+          <li><span class="dot" style="background:#128C7E;"></span>También disponible por asesor (+$50 implementación · +$30/asesor/mes)</li>
+        </ul>
+        <div style="background: rgba(18,140,126,.08); border-left: 3px solid #128C7E; padding: 13px 16px; margin-bottom: 20px;">
+          <p style="font-size:12px;color:var(--gray-dark);line-height:1.6;">🚀 <strong>Más adelante:</strong> Sobre el mismo sistema de WhatsApp se puede implementar envío masivo de información de proyectos a toda la base de contactos — ideal para lanzamientos de preventa o actualizaciones de obra.</p>
+        </div>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$150</strong></div>
+          <div class="mod-price-item"><strong>$70<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ MÓDULO 5 ── IA: Contratos ══ -->
+    <div class="mod-card reveal">
+      <div class="mod-visual" style="background: linear-gradient(rgba(20,20,20,0.82), rgba(20,20,20,0.82)), url('https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&auto=format&fit=crop') center/cover no-repeat; color: #F5C200;">
+        <svg class="mod-icon" viewBox="0 0 76 76" fill="none">
+          <rect x="18" y="10" width="40" height="52" rx="3" stroke="currentColor" stroke-width="2.2"/>
+          <path d="M26 24H50M26 32H50M26 40H40" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+          <circle cx="54" cy="54" r="14" fill="#1a1a1a" stroke="currentColor" stroke-width="2"/>
+          <path d="M48 54l4 4 8-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M14 28H18M58 28H62" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" opacity=".35"/>
+        </svg>
+        <span class="big-num">05</span>
+      </div>
+      <div class="mod-body">
+        <div class="mod-tag">
+          <span class="mod-num-badge" style="background:#F5C200;color:#1a1a1a;">05</span>
+          Inteligencia Artificial
+        </div>
+        <h3>IA para Generación de Contratos</h3>
+        <p class="mod-quote">"El sistema llena el contrato por ti y lo envía al cliente — sin que nadie tenga que escribir nada."</p>
+        <p class="mod-desc">La primera implementación de IA para la constructora automatiza uno de los procesos más repetitivos: la creación de contratos. El sistema toma la información del cliente que ya está en el CRM, la introduce en tu plantilla de contrato oficial, genera el documento y lo envía automáticamente por correo electrónico corporativo.</p>
+        <ul class="mod-list">
+          <li><span class="dot" style="background:#F5C200;"></span>Toma los datos del cliente directamente desde el CRM</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Llena la plantilla de contrato aprobada por la empresa</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Genera el documento listo para firmar</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Lo envía automáticamente desde el correo oficial de la constructora</li>
+          <li><span class="dot" style="background:#F5C200;"></span>Queda registrado en el historial del cliente dentro del CRM</li>
+        </ul>
+        <div style="background: rgba(245,194,0,.08); border-left: 3px solid var(--yellow); padding: 13px 16px; margin-bottom: 20px;">
+          <p style="font-size:12px;color:var(--gray-dark);line-height:1.6;">🔮 <strong>Base para más:</strong> Una vez instalado este sistema, se puede expandir a generación de propuestas, análisis de clientes potenciales, seguimiento automatizado y más — usando la misma infraestructura.</p>
+        </div>
+        <div class="mod-price-row">
+          <div class="mod-price-item">Implementación <strong>$150</strong></div>
+          <div class="mod-price-item"><strong>$80<small>/mes</small></strong></div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ══ BONUS: GOOGLE WORKSPACE ════════════════ -->
+  <section class="bonus-wrap" id="bonus">
+    <div class="bonus-inner">
+      <div class="bonus-left reveal">
+        <div class="bonus-gift-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" opacity=".7"><path d="M20 12v10H4V12M22 7H2v5h20V7zM12 22V7M12 7H7.5a2.5 2.5 0 010-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 000-5C13 2 12 7 12 7z"/></svg>
+          De regalo con tu contrato
+        </div>
+        <h2>Google Workspace<br><em>Administrado por Remarkable</em></h2>
+        <p>Con cualquier servicio contratado, nos encargamos de configurar y administrar tu Google Workspace — sin costo de gestión de nuestra parte. Tú pagas directamente a Google lo que ellos cobran; nosotros nos ocupamos de que todo funcione.</p>
+        <p>Esto incluye la configuración de tu correo corporativo, Google Meet, Drive, Calendar, y Docs — todo bajo el nombre de tu empresa.</p>
+        <div class="bonus-email-example">
+          <div class="email-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            administracion@constructoramuñoz.com
+            <span>Admin</span>
+          </div>
+          <div class="email-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            ventas@constructoramuñoz.com
+            <span>Equipo</span>
+          </div>
+          <div class="email-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            info@constructoramuñoz.com
+            <span>Contacto</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="bonus-right reveal d2">
+        <p style="font-size:11px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:20px;">Precios de Google (pass-through sin markup)</p>
+        <div class="gws-plans">
+          <div class="gws-plan rec">
+            <div class="gws-badge">Recomendado</div>
+            <div class="gws-plan-name">Business Starter</div>
+            <div class="gws-plan-price">$6 <small>/usuario/mes</small></div>
+            <ul class="gws-plan-features">
+              <li>Correo corporativo Gmail</li>
+              <li>Google Meet (video reuniones)</li>
+              <li>Google Drive 30 GB por usuario</li>
+              <li>Docs, Sheets, Slides, Calendar</li>
+              <li>Soporte 24/7 de Google</li>
+            </ul>
+          </div>
+          <div class="gws-plan">
+            <div class="gws-plan-name">Business Standard</div>
+            <div class="gws-plan-price">$12 <small>/usuario/mes</small></div>
+            <ul class="gws-plan-features">
+              <li>Todo lo de Starter</li>
+              <li>2 TB de almacenamiento por usuario</li>
+              <li>Grabación de reuniones en Drive</li>
+              <li>Funciones avanzadas de seguridad</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gws-passthrough">Remarkable administra la cuenta, configura los usuarios y gestiona el dominio. No cobramos margen sobre el precio de Google — lo que Google cobra, eso pagas.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ RESUMEN DE PRECIOS ══════════════════════ -->
+  <section class="summary-wrap" id="resumen">
+    <div class="summary-inner">
+      <div class="summary-hd reveal">
+        <span class="eyebrow e-dim">Resumen</span>
+        <h2 class="sec-title">Todo en un vistazo</h2>
+        <p class="sec-sub">Lo que discutimos en la reunión — precios claros, sin sorpresas.</p>
+      </div>
+
+      <table class="summary-table reveal">
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Implementación</th>
+            <th>Mensual</th>
+            <th>Anual</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Módulo 1 — Web Standalone
+              <span class="requires">Sin CRM · servidor independiente</span>
+            </td>
+            <td><span class="price-num">$130</span></td>
+            <td><span class="price-num">$70</span> <span class="price-unit">/mes</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              Módulo 2 — Remarkable CRM
+              <span class="requires">Incluye página web integrada</span>
+            </td>
+            <td><span class="price-num">$130</span></td>
+            <td><span class="price-num">$300</span> <span class="price-unit">/mes</span></td>
+            <td><span class="price-num">$3,300</span> <span class="price-unit">/año (11 meses)</span></td>
+          </tr>
+          <tr>
+            <td>
+              Módulo 3 — Asesores (×10)
+              <span class="requires">Requiere Módulo 2 · pago individual o empresa</span>
+            </td>
+            <td><span class="price-num">$0</span></td>
+            <td><span class="price-num">$300</span> <span class="price-unit">/mes (10 asesores)</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              Módulo 4 — Bot WhatsApp Empresa
+              <span class="requires">Número principal · respuestas 24/7</span>
+            </td>
+            <td><span class="price-num">$150</span></td>
+            <td><span class="price-num">$70</span> <span class="price-unit">/mes</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              Módulo 4B — Bot por Asesor (add-on)
+              <span class="requires">$50 setup + $30/mes por asesor adicional</span>
+            </td>
+            <td><span class="price-num">$50</span> <span class="price-unit">/asesor</span></td>
+            <td><span class="price-num">$30</span> <span class="price-unit">/asesor/mes</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              Módulo 5 — IA: Generación de Contratos
+              <span class="requires">Integrado con CRM · envío por correo oficial</span>
+            </td>
+            <td><span class="price-num">$150</span></td>
+            <td><span class="price-num">$80</span> <span class="price-unit">/mes</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr>
+            <td>
+              Google Workspace (administrado)
+              <span class="requires">Gestión gratuita · precio pass-through de Google</span>
+            </td>
+            <td><span class="price-num">$0</span> <span class="price-unit">Remarkable no cobra</span></td>
+            <td><span class="price-num">$6–12</span> <span class="price-unit">/usuario/mes (Google)</span></td>
+            <td><span class="price-unit">—</span></td>
+          </tr>
+          <tr class="total-row">
+            <td>
+              Paquete completo (M2 + M3 + M4 + M5)
+              <span style="font-size:10px;font-weight:500;opacity:.5;display:block;margin-top:2px;">Sin contar dominio ni Google · antes de asesores adicionales</span>
+            </td>
+            <td><span class="price-num">$430</span> <span class="price-unit">one-time</span></td>
+            <td><span class="price-num">$750</span> <span class="price-unit">/mes</span></td>
+            <td><span class="price-num">$8,700</span> <span class="price-unit">/año (CRM anual)</span></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="summary-note">
+        * El costo del dominio (ej. $50 por 3 años) se paga una sola vez adicional, independiente del plan mensual.<br>
+        * Google Workspace se factura directamente desde Google al correo corporativo — Remarkable solo administra sin margen.<br>
+        * Los servicios se activan por módulo — no es necesario contratar todo al inicio.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══ CTA ════════════════════════════════════ -->
+  <section class="cta-wrap" id="contacto">
+    <div class="section-wrap">
+      <span class="eyebrow" style="color:rgba(0,0,0,.35);">El siguiente paso</span>
+      <h2 class="sec-title reveal">¿Todo claro? Definamos por dónde empezar.</h2>
+      <p class="sec-sub reveal">Conversemos qué módulos tienen más sentido activar primero. Podemos arrancar esta semana.</p>
+      <a href="https://wa.me/59169464933" target="_blank" rel="noopener" class="btn-wa reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Confirmar con Remarkable →
+      </a>
+      <span class="cta-note">Remarkable · Cochabamba, Bolivia · weremark.com</span>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ═════════════════════════════════ -->
+  <footer>
+    <img src="https://i.imgur.com/jtB9I5x.png" alt="Remarkable">
+    <div>
+      <div class="ft-text">Propuesta Detallada Post-Reunión preparada por Remarkable para Constructora Muñoz · Mayo 2026</div>
+      <div class="ft-valid">Esta propuesta tiene validez de 30 días a partir de la fecha de reunión.</div>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 20), { passive: true });
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
+</body>
+</html>
